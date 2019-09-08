@@ -1,0 +1,39 @@
+(*
+    until => executa o estado em que está e transiciona para outro estado
+    unless => transiciona para outro estado e executa o novo estado
+*)
+
+node radiator(up1, down1, up2, down2: bool) returns (status, power:int)
+let
+    automaton
+     state Off do 
+        status = 0;
+        power = 0;
+     unless up1 then FrostProtection
+
+     state FrostProtection do
+        status = 1;
+        power = 300;
+     unless up1 then Eco
+        | up2 then High
+        | down1 then Off
+
+     state Eco do
+        status = 2;
+        power = 1500;
+     unless up2 then High
+        | down1 then FrostProtection 
+
+     state High do
+        status = 3;
+        power = 2000;
+     unless down2 then FrostProtection
+        | down1 then Eco
+
+    end 
+tel
+
+node radiators(up1, down1, up2, down2: bool) returns (status, power: int)
+let
+    (status, power) = inlined radiator(up1, down1, up2, down2);
+tel
