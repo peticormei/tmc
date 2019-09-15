@@ -1,0 +1,75 @@
+(*
+    until => executa o estado em que está e transiciona para outro estado
+    unless => transiciona para outro estado e executa o novo estado
+*)
+
+node radiator(up1, up2, down1, down2, c1, c2: bool) returns (state_rad, power_rad: int)
+let
+	automaton
+		state Off do
+			power_rad = 0;
+			state_rad = 0;
+		unless up1 or not c1 then FrostProtection
+
+		state FrostProtection do
+			power_rad = 300;
+			state_rad = 1;
+		unless up1 & c1 then Eco
+			| down1 or not c1 then Off
+			| up2 & c2 then High
+
+		state Eco do
+			power_rad = 1500;
+			state_rad = 2;
+		unless up2 & c2 then High
+			| down1 or not c1 then FrostProtection
+
+		state High do
+			power_rad = 2000;
+			state_rad = 3;
+		unless down2 or not c2 then FrostProtection
+			| down1 or not c1 then Eco
+	end
+tel
+
+node presence_ctrl(presence: bool) returns (room_oc: bool)
+let
+	automaton
+		state Empty do
+			room_oc = false;
+		unless presence then Ocupied
+
+		state Ocupied do
+			room_oc = true;
+		unless not presence then Empty
+	end
+tel
+
+node lamp(lamp_on, c_lamp: bool) returns (state_lmp: bool)
+let
+	automaton
+		state Off do
+			state_lmp = false;
+		unless lamp_on & c_lamp then On
+
+		state On do
+			state_lmp = true;
+		unless not lamp_on or not c_lamp then Off
+	end
+tel
+
+node room(up1, up2, down1, down2, presence, turn_lamp: bool) returns (state_rad, power_rad: int; room_oc, state_lmp: bool)
+	contract
+	var rule1, rule4: bool;
+	let
+		rule1 = room_oc or (not state_lmp);
+		rule4 = room_oc or ((not state_lmp) & (state_rad < 2)); 
+	tel
+	enforce (rule1) & (rule4)
+	with (rad_off, rad_frost, lamp_on: bool)
+
+let
+	(state_rad, power_rad) = inlined radiator(up1, up2, down1, down2, rad_off, rad_frost);
+	room_oc = inlined presence_ctrl(presence);
+	state_lmp = inlined lamp(turn_lamp, lamp_on);
+tel
