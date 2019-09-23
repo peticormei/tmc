@@ -143,20 +143,20 @@ let
 	end
 tel
 
-node lamp(c_lamp: bool) returns (state_lmp: bool)
+node device(turn_device, c1_device, c2_device: bool) returns (state_device: bool)
 let
 	automaton
 		state Off do
-			state_lmp = false;
-		unless c_lamp then On
+			state_device = false;
+		unless (turn_device & c1_device) or not c2_device then On
 
 		state On do
-			state_lmp = true;
-		unless not c_lamp then Off
+			state_device = true;
+		unless (turn_device & c2_device) or not c1_device then Off
 	end
 tel
 
-node tv(c_tv: bool) returns (state_tv: bool)
+(* node tv(c_tv: bool) returns (state_tv: bool)
 let
 	automaton
 		state Off do
@@ -167,7 +167,7 @@ let
 			state_tv = true;
 		unless not c_tv then Off
 	end
-tel
+tel *)
 
 node management_ctrl(eco_input, comfort_input: bool) returns (mode: modes)
 let
@@ -189,7 +189,7 @@ let
 	end
 tel
 
-node main(eco_input, comfort_input, presence, up1, down1, up2, down2, end_w, start_w, finish, start_o, cold, temp_ok, push_door, push_window: bool) returns (state_rad, power_rad, state_w_machine, power_w_machine, state_oven, power_oven: int; room_oc, door_open, window_open, state_lamp, state_tv: bool; actual_policy: modes)
+node main(eco_input, comfort_input, presence, up1, down1, up2, down2, end_w, start_w, finish, start_o, cold, temp_ok, push_door, push_window, turn_lamp, turn_tv: bool) returns (state_rad, power_rad, state_w_machine, power_w_machine, state_oven, power_oven: int; room_oc, door_open, window_open, state_lamp, state_tv: bool; actual_policy: modes)
 	contract
 		var rule1, rule2, rule3, rule4, rule5: bool; total_engergy: int;
 
@@ -197,7 +197,7 @@ node main(eco_input, comfort_input, presence, up1, down1, up2, down2, end_w, sta
 		rule1 = not room_oc or (state_lamp or state_tv);
 		rule2 = not (not room_oc) or not(door_open or window_open);
 		rule3 = not (door_open or window_open) or (state_rad < 2);
-		rule4 = not (not room_oc) or (not state_lamp) or (not state_tv)  & (state_rad < 2);
+		rule4 = not (not room_oc) or not (state_lamp or state_tv)  & (state_rad < 2);
 
 		total_engergy = power_rad + power_w_machine + power_oven;
 
@@ -209,7 +209,7 @@ node main(eco_input, comfort_input, presence, up1, down1, up2, down2, end_w, sta
 	tel
 
 	enforce (rule1 & rule2 & rule3 & rule4 & rule5)
-	with (rad_off, rad_frost, c_w_machine, c_oven, c_door, c_window, lamp_on, tv_on: bool)
+	with (rad_off, rad_frost, c_w_machine, c_oven, c_door, c_window, c1_tv, c2_tv, c1_lamp, c2_lamp: bool)
 
 let
 	actual_policy = inlined management_ctrl(eco_input, comfort_input);
@@ -222,6 +222,6 @@ let
 	door_open = inlined door(push_door, c_door);
 	window_open = inlined window(push_window, c_window);
 
-	state_lamp = inlined lamp(lamp_on);
-	state_tv = inlined tv(tv_on);
+	state_lamp = inlined device(turn_lamp, c1_lamp, c2_lamp);
+	state_tv = inlined device(turn_tv, c1_tv, c2_tv);
 tel
