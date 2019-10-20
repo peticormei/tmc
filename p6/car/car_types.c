@@ -1,5 +1,5 @@
-/* --- Generated the 14/10/2019 at 14:12 --- */
-/* --- heptagon compiler, version 1.03.00 (compiled mon. oct. 14 13:8:41 CET 2019) --- */
+/* --- Generated the 20/10/2019 at 2:1 --- */
+/* --- heptagon compiler, version 1.03.00 (compiled sun. oct. 20 0:47:43 CET 2019) --- */
 /* --- Command line: /home/opam/.opam/4.02/bin/heptc -target c -target z3z -s controller car.ept --- */
 
 #include <stdio.h>
@@ -31,27 +31,27 @@ char* string_of_Car__st_8(Car__st_8 x, char* buf) {
 }
 
 Car__st_7 Car__st_7_of_string(char* s) {
-  if ((strcmp(s, "St_7_TURNING_STATE")==0)) {
-    return Car__St_7_TURNING_STATE;
+  if ((strcmp(s, "St_7_TURNING")==0)) {
+    return Car__St_7_TURNING;
   };
-  if ((strcmp(s, "St_7_STURNING_STATE")==0)) {
-    return Car__St_7_STURNING_STATE;
+  if ((strcmp(s, "St_7_STURNING")==0)) {
+    return Car__St_7_STURNING;
   };
-  if ((strcmp(s, "St_7_MOVING_STATE")==0)) {
-    return Car__St_7_MOVING_STATE;
+  if ((strcmp(s, "St_7_MOVING")==0)) {
+    return Car__St_7_MOVING;
   };
 }
 
 char* string_of_Car__st_7(Car__st_7 x, char* buf) {
   switch (x) {
-    case Car__St_7_TURNING_STATE:
-      strcpy(buf, "St_7_TURNING_STATE");
+    case Car__St_7_TURNING:
+      strcpy(buf, "St_7_TURNING");
       break;
-    case Car__St_7_STURNING_STATE:
-      strcpy(buf, "St_7_STURNING_STATE");
+    case Car__St_7_STURNING:
+      strcpy(buf, "St_7_STURNING");
       break;
-    case Car__St_7_MOVING_STATE:
-      strcpy(buf, "St_7_MOVING_STATE");
+    case Car__St_7_MOVING:
+      strcpy(buf, "St_7_MOVING");
       break;
     default:
       break;
@@ -60,21 +60,21 @@ char* string_of_Car__st_7(Car__st_7 x, char* buf) {
 }
 
 Car__st_6 Car__st_6_of_string(char* s) {
-  if ((strcmp(s, "St_6_FORWARD_STATE")==0)) {
-    return Car__St_6_FORWARD_STATE;
+  if ((strcmp(s, "St_6_FORWARD")==0)) {
+    return Car__St_6_FORWARD;
   };
-  if ((strcmp(s, "St_6_BACKWARD_STATE")==0)) {
-    return Car__St_6_BACKWARD_STATE;
+  if ((strcmp(s, "St_6_BACKWARD")==0)) {
+    return Car__St_6_BACKWARD;
   };
 }
 
 char* string_of_Car__st_6(Car__st_6 x, char* buf) {
   switch (x) {
-    case Car__St_6_FORWARD_STATE:
-      strcpy(buf, "St_6_FORWARD_STATE");
+    case Car__St_6_FORWARD:
+      strcpy(buf, "St_6_FORWARD");
       break;
-    case Car__St_6_BACKWARD_STATE:
-      strcpy(buf, "St_6_BACKWARD_STATE");
+    case Car__St_6_BACKWARD:
+      strcpy(buf, "St_6_BACKWARD");
       break;
     default:
       break;
@@ -83,21 +83,21 @@ char* string_of_Car__st_6(Car__st_6 x, char* buf) {
 }
 
 Car__st_5 Car__st_5_of_string(char* s) {
-  if ((strcmp(s, "St_5_FORWARD_STATE")==0)) {
-    return Car__St_5_FORWARD_STATE;
+  if ((strcmp(s, "St_5_FORWARD")==0)) {
+    return Car__St_5_FORWARD;
   };
-  if ((strcmp(s, "St_5_BACKWARD_STATE")==0)) {
-    return Car__St_5_BACKWARD_STATE;
+  if ((strcmp(s, "St_5_BACKWARD")==0)) {
+    return Car__St_5_BACKWARD;
   };
 }
 
 char* string_of_Car__st_5(Car__st_5 x, char* buf) {
   switch (x) {
-    case Car__St_5_FORWARD_STATE:
-      strcpy(buf, "St_5_FORWARD_STATE");
+    case Car__St_5_FORWARD:
+      strcpy(buf, "St_5_FORWARD");
       break;
-    case Car__St_5_BACKWARD_STATE:
-      strcpy(buf, "St_5_BACKWARD_STATE");
+    case Car__St_5_BACKWARD:
+      strcpy(buf, "St_5_BACKWARD");
       break;
     default:
       break;
@@ -106,21 +106,21 @@ char* string_of_Car__st_5(Car__st_5 x, char* buf) {
 }
 
 Car__st_4 Car__st_4_of_string(char* s) {
-  if ((strcmp(s, "St_4_FORWARD_STATE")==0)) {
-    return Car__St_4_FORWARD_STATE;
+  if ((strcmp(s, "St_4_FORWARD")==0)) {
+    return Car__St_4_FORWARD;
   };
-  if ((strcmp(s, "St_4_BACKWARD_STATE")==0)) {
-    return Car__St_4_BACKWARD_STATE;
+  if ((strcmp(s, "St_4_BACKWARD")==0)) {
+    return Car__St_4_BACKWARD;
   };
 }
 
 char* string_of_Car__st_4(Car__st_4 x, char* buf) {
   switch (x) {
-    case Car__St_4_FORWARD_STATE:
-      strcpy(buf, "St_4_FORWARD_STATE");
+    case Car__St_4_FORWARD:
+      strcpy(buf, "St_4_FORWARD");
       break;
-    case Car__St_4_BACKWARD_STATE:
-      strcpy(buf, "St_4_BACKWARD_STATE");
+    case Car__St_4_BACKWARD:
+      strcpy(buf, "St_4_BACKWARD");
       break;
     default:
       break;
@@ -129,21 +129,21 @@ char* string_of_Car__st_4(Car__st_4 x, char* buf) {
 }
 
 Car__st_3 Car__st_3_of_string(char* s) {
-  if ((strcmp(s, "St_3_FORWARD_STATE")==0)) {
-    return Car__St_3_FORWARD_STATE;
+  if ((strcmp(s, "St_3_FORWARD")==0)) {
+    return Car__St_3_FORWARD;
   };
-  if ((strcmp(s, "St_3_BACKWARD_STATE")==0)) {
-    return Car__St_3_BACKWARD_STATE;
+  if ((strcmp(s, "St_3_BACKWARD")==0)) {
+    return Car__St_3_BACKWARD;
   };
 }
 
 char* string_of_Car__st_3(Car__st_3 x, char* buf) {
   switch (x) {
-    case Car__St_3_FORWARD_STATE:
-      strcpy(buf, "St_3_FORWARD_STATE");
+    case Car__St_3_FORWARD:
+      strcpy(buf, "St_3_FORWARD");
       break;
-    case Car__St_3_BACKWARD_STATE:
-      strcpy(buf, "St_3_BACKWARD_STATE");
+    case Car__St_3_BACKWARD:
+      strcpy(buf, "St_3_BACKWARD");
       break;
     default:
       break;
@@ -152,27 +152,27 @@ char* string_of_Car__st_3(Car__st_3 x, char* buf) {
 }
 
 Car__st_2 Car__st_2_of_string(char* s) {
-  if ((strcmp(s, "St_2_TURNING_STATE")==0)) {
-    return Car__St_2_TURNING_STATE;
+  if ((strcmp(s, "St_2_TURNING")==0)) {
+    return Car__St_2_TURNING;
   };
-  if ((strcmp(s, "St_2_STURNING_STATE")==0)) {
-    return Car__St_2_STURNING_STATE;
+  if ((strcmp(s, "St_2_STURNING")==0)) {
+    return Car__St_2_STURNING;
   };
-  if ((strcmp(s, "St_2_MOVING_STATE")==0)) {
-    return Car__St_2_MOVING_STATE;
+  if ((strcmp(s, "St_2_MOVING")==0)) {
+    return Car__St_2_MOVING;
   };
 }
 
 char* string_of_Car__st_2(Car__st_2 x, char* buf) {
   switch (x) {
-    case Car__St_2_TURNING_STATE:
-      strcpy(buf, "St_2_TURNING_STATE");
+    case Car__St_2_TURNING:
+      strcpy(buf, "St_2_TURNING");
       break;
-    case Car__St_2_STURNING_STATE:
-      strcpy(buf, "St_2_STURNING_STATE");
+    case Car__St_2_STURNING:
+      strcpy(buf, "St_2_STURNING");
       break;
-    case Car__St_2_MOVING_STATE:
-      strcpy(buf, "St_2_MOVING_STATE");
+    case Car__St_2_MOVING:
+      strcpy(buf, "St_2_MOVING");
       break;
     default:
       break;
@@ -181,21 +181,21 @@ char* string_of_Car__st_2(Car__st_2 x, char* buf) {
 }
 
 Car__st_1 Car__st_1_of_string(char* s) {
-  if ((strcmp(s, "St_1_FORWARD_STATE")==0)) {
-    return Car__St_1_FORWARD_STATE;
+  if ((strcmp(s, "St_1_FORWARD")==0)) {
+    return Car__St_1_FORWARD;
   };
-  if ((strcmp(s, "St_1_BACKWARD_STATE")==0)) {
-    return Car__St_1_BACKWARD_STATE;
+  if ((strcmp(s, "St_1_BACKWARD")==0)) {
+    return Car__St_1_BACKWARD;
   };
 }
 
 char* string_of_Car__st_1(Car__st_1 x, char* buf) {
   switch (x) {
-    case Car__St_1_FORWARD_STATE:
-      strcpy(buf, "St_1_FORWARD_STATE");
+    case Car__St_1_FORWARD:
+      strcpy(buf, "St_1_FORWARD");
       break;
-    case Car__St_1_BACKWARD_STATE:
-      strcpy(buf, "St_1_BACKWARD_STATE");
+    case Car__St_1_BACKWARD:
+      strcpy(buf, "St_1_BACKWARD");
       break;
     default:
       break;

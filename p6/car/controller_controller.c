@@ -1,5 +1,5 @@
-/* --- Generated the 14/10/2019 at 14:12 --- */
-/* --- heptagon compiler, version 1.03.00 (compiled mon. oct. 14 13:8:41 CET 2019) --- */
+/* --- Generated the 20/10/2019 at 2:1 --- */
+/* --- heptagon compiler, version 1.03.00 (compiled sun. oct. 20 0:47:43 CET 2019) --- */
 /* --- Command line: /home/opam/.opam/4.02/bin/heptc -target c controller_controller.ept --- */
 
 #include <stdio.h>
@@ -19,6 +19,11 @@ void Controller_controller__controller_controller_controller_c_motor4_step(
   int controller_c_motor1, int controller_c_move,
   Controller_controller__controller_controller_controller_c_motor4_out* _out) {
   
+  int v_18;
+  int v_17;
+  int v_16;
+  int v_15;
+  int v_14;
   int v_13;
   int v_12;
   int v_11;
@@ -55,183 +60,168 @@ void Controller_controller__controller_controller_controller_c_motor4_step(
   int sub_19;
   int sub_20;
   int sub_21;
-  int sub_22;
-  int sub_23;
-  int sub_24;
-  int sub_25;
-  int sub_26;
-  int sub_27;
-  sub_8 = false;
-  sub_7 = sub_8;
+  sub_7 = false;
+  if (controller_v_57) {
+    v_7 = false;
+  } else {
+    v_7 = sub_7;
+  };
+  if (controller_c_move) {
+    v_8 = sub_7;
+  } else {
+    v_8 = v_7;
+  };
   if (controller_v_58) {
-    sub_6 = sub_7;
+    sub_6 = v_8;
   } else {
     sub_6 = false;
   };
-  if (controller_v_57) {
-    v_5 = false;
+  if (controller_v_17) {
+    v_9 = false;
   } else {
-    v_5 = sub_6;
+    v_9 = sub_6;
   };
-  if (controller_c_move) {
+  if (controller_v_18) {
     sub_5 = sub_6;
   } else {
-    sub_5 = v_5;
+    sub_5 = false;
   };
-  if (controller_v_17) {
+  sub_4 = sub_5;
+  if (controller_ck_1) {
+    sub_3 = v_9;
+  } else {
+    sub_3 = sub_4;
+  };
+  sub_2 = sub_3;
+  sub_10 = sub_7;
+  if (controller_v_57) {
+    v_5 = sub_7;
+  } else {
+    v_5 = false;
+  };
+  if (controller_c_move) {
     v_6 = false;
   } else {
-    v_6 = sub_5;
-  };
-  if (controller_v_18) {
-    sub_4 = sub_5;
-  } else {
-    sub_4 = false;
-  };
-  sub_3 = sub_4;
-  if (controller_ck_1) {
-    sub_2 = v_6;
-  } else {
-    sub_2 = sub_3;
-  };
-  if (controller_c_motor1) {
-    sub_13 = sub_8;
-  } else {
-    sub_13 = false;
+    v_6 = v_5;
   };
   if (controller_v_58) {
-    sub_12 = sub_7;
+    sub_11 = v_6;
   } else {
-    sub_12 = sub_13;
-  };
-  if (controller_v_57) {
-    v_4 = sub_13;
-  } else {
-    v_4 = sub_12;
-  };
-  if (controller_c_move) {
-    sub_11 = sub_12;
-  } else {
-    sub_11 = v_4;
-  };
-  if (controller_v_58) {
-    sub_15 = false;
-  } else {
-    sub_15 = sub_13;
-  };
-  if (controller_v_57) {
-    v_3 = sub_13;
-  } else {
-    v_3 = sub_15;
-  };
-  if (controller_c_move) {
-    sub_14 = sub_15;
-  } else {
-    sub_14 = v_3;
+    sub_11 = sub_10;
   };
   if (controller_v_18) {
-    sub_10 = sub_11;
+    sub_9 = sub_10;
   } else {
-    sub_10 = sub_14;
+    sub_9 = sub_11;
   };
-  sub_9 = sub_10;
-  sub_16 = sub_14;
+  sub_8 = sub_9;
+  sub_12 = sub_11;
   if (controller_v_17) {
-    v_7 = sub_16;
+    v_10 = sub_12;
   } else {
-    v_7 = sub_11;
+    v_10 = sub_10;
   };
-  if (controller_ck_1) {
-    v_8 = v_7;
-  } else {
-    v_8 = sub_9;
-  };
-  if (controller_c_motor2) {
-    v_9 = sub_2;
-  } else {
-    v_9 = v_8;
-  };
-  if (controller_c_motor3) {
-    sub_1 = v_9;
-  } else {
-    sub_1 = sub_2;
-  };
-  sub_23 = true;
-  sub_22 = sub_23;
-  if (controller_v_58) {
-    sub_21 = sub_22;
-  } else {
-    sub_21 = false;
-  };
-  if (controller_v_57) {
-    v_1 = false;
-  } else {
-    v_1 = sub_21;
-  };
-  if (controller_c_move) {
-    sub_20 = sub_21;
-  } else {
-    sub_20 = v_1;
-  };
-  if (controller_v_17) {
-    v_2 = false;
-  } else {
-    v_2 = sub_20;
-  };
-  if (controller_v_18) {
-    sub_19 = sub_20;
-  } else {
-    sub_19 = false;
-  };
-  sub_18 = sub_19;
-  if (controller_ck_1) {
-    sub_17 = v_2;
-  } else {
-    sub_17 = sub_18;
-  };
-  if (controller_v_58) {
-    sub_27 = sub_22;
-  } else {
-    sub_27 = sub_13;
-  };
-  if (controller_v_57) {
-    v = sub_13;
-  } else {
-    v = sub_27;
-  };
-  if (controller_c_move) {
-    sub_26 = sub_27;
-  } else {
-    sub_26 = v;
-  };
-  if (controller_v_17) {
-    v_10 = sub_16;
-  } else {
-    v_10 = sub_26;
-  };
-  if (controller_v_18) {
-    sub_25 = sub_26;
-  } else {
-    sub_25 = sub_14;
-  };
-  sub_24 = sub_25;
   if (controller_ck_1) {
     v_11 = v_10;
   } else {
-    v_11 = sub_24;
+    v_11 = sub_8;
+  };
+  if (controller_c_motor1) {
+    v_12 = v_11;
+  } else {
+    v_12 = sub_3;
   };
   if (controller_c_motor2) {
-    v_12 = sub_17;
-  } else {
-    v_12 = v_11;
-  };
-  if (controller_c_motor3) {
     v_13 = v_12;
   } else {
-    v_13 = sub_17;
+    v_13 = sub_2;
+  };
+  if (controller_c_motor3) {
+    sub_1 = sub_2;
+  } else {
+    sub_1 = v_13;
+  };
+  sub_18 = true;
+  if (controller_v_57) {
+    v_2 = false;
+  } else {
+    v_2 = sub_18;
+  };
+  if (controller_c_move) {
+    v_3 = sub_18;
+  } else {
+    v_3 = v_2;
+  };
+  if (controller_v_58) {
+    sub_17 = v_3;
+  } else {
+    sub_17 = false;
+  };
+  if (controller_v_17) {
+    v_4 = false;
+  } else {
+    v_4 = sub_17;
+  };
+  if (controller_v_18) {
+    sub_16 = sub_17;
+  } else {
+    sub_16 = false;
+  };
+  sub_15 = sub_16;
+  if (controller_ck_1) {
+    sub_14 = v_4;
+  } else {
+    sub_14 = sub_15;
+  };
+  sub_13 = sub_14;
+  if (controller_v_57) {
+    v = sub_7;
+  } else {
+    v = sub_18;
+  };
+  if (controller_c_move) {
+    v_1 = sub_18;
+  } else {
+    v_1 = v;
+  };
+  if (controller_v_58) {
+    sub_21 = v_1;
+  } else {
+    sub_21 = sub_10;
+  };
+  if (controller_v_17) {
+    v_14 = sub_12;
+  } else {
+    v_14 = sub_21;
+  };
+  if (controller_v_18) {
+    sub_20 = sub_21;
+  } else {
+    sub_20 = sub_11;
+  };
+  sub_19 = sub_20;
+  if (controller_ck_1) {
+    v_15 = v_14;
+  } else {
+    v_15 = sub_19;
+  };
+  if (controller_c_motor1) {
+    v_16 = v_15;
+  } else {
+    v_16 = sub_14;
+  };
+  if (controller_c_motor2) {
+    v_17 = v_16;
+  } else {
+    v_17 = sub_13;
+  };
+  if (controller_c_motor3) {
+    v_18 = sub_13;
+  } else {
+    v_18 = v_17;
   };
   if (p_controller_c_motor4) {
-    sub_0 = v_13;
+    sub_0 = v_18;
   } else {
     sub_0 = sub_1;
   };
@@ -250,6 +240,14 @@ void Controller_controller__controller_controller_controller_c_motor3_step(
   int controller_c_move,
   Controller_controller__controller_controller_controller_c_motor3_out* _out) {
   
+  int v_34;
+  int v_33;
+  int v_32;
+  int v_31;
+  int v_30;
+  int v_29;
+  int v_28;
+  int v_27;
   int v_26;
   int v_25;
   int v_24;
@@ -258,11 +256,6 @@ void Controller_controller__controller_controller_controller_c_motor3_step(
   int v_21;
   int v_20;
   int v_19;
-  int v_18;
-  int v_17;
-  int v_16;
-  int v_15;
-  int v_14;
   int v;
   int sub_0;
   int sub_1;
@@ -284,123 +277,132 @@ void Controller_controller__controller_controller_controller_c_motor3_step(
   int sub_17;
   int sub_18;
   int sub_19;
-  int sub_20;
-  int sub_21;
-  int sub_22;
-  int sub_23;
-  int sub_24;
-  int sub_25;
-  sub_7 = false;
-  sub_6 = sub_7;
-  if (controller_v_58) {
-    sub_5 = sub_6;
-  } else {
-    sub_5 = false;
-  };
+  sub_5 = false;
+  sub_4 = sub_5;
   if (controller_v_57) {
-    v_17 = false;
+    v_26 = sub_5;
   } else {
-    v_17 = sub_5;
+    v_26 = false;
   };
   if (controller_c_move) {
-    sub_4 = sub_5;
+    v_27 = false;
   } else {
-    sub_4 = v_17;
+    v_27 = v_26;
   };
-  if (controller_v_17) {
-    v_18 = false;
+  if (controller_v_58) {
+    sub_6 = v_27;
   } else {
-    v_18 = sub_4;
+    sub_6 = sub_4;
   };
   if (controller_v_18) {
     sub_3 = sub_4;
   } else {
-    sub_3 = false;
+    sub_3 = sub_6;
   };
   sub_2 = sub_3;
+  sub_7 = sub_6;
+  if (controller_v_17) {
+    v_28 = sub_7;
+  } else {
+    v_28 = sub_4;
+  };
   if (controller_ck_1) {
-    v_19 = v_18;
+    v_29 = v_28;
   } else {
-    v_19 = sub_2;
-  };
-  sub_13 = true;
-  if (controller_c_motor1) {
-    sub_12 = sub_13;
-  } else {
-    sub_12 = false;
-  };
-  if (controller_v_58) {
-    sub_11 = sub_6;
-  } else {
-    sub_11 = sub_12;
+    v_29 = sub_2;
   };
   if (controller_v_57) {
-    v_16 = sub_12;
+    v_23 = false;
   } else {
-    v_16 = sub_11;
+    v_23 = sub_5;
   };
   if (controller_c_move) {
-    sub_10 = sub_11;
+    v_24 = sub_5;
   } else {
-    sub_10 = v_16;
+    v_24 = v_23;
   };
   if (controller_v_58) {
-    sub_15 = false;
+    sub_11 = v_24;
   } else {
-    sub_15 = sub_12;
+    sub_11 = false;
   };
-  if (controller_v_57) {
-    v_15 = sub_12;
+  if (controller_v_17) {
+    v_25 = false;
   } else {
-    v_15 = sub_15;
-  };
-  if (controller_c_move) {
-    sub_14 = sub_15;
-  } else {
-    sub_14 = v_15;
+    v_25 = sub_11;
   };
   if (controller_v_18) {
-    sub_9 = sub_10;
+    sub_10 = sub_11;
   } else {
-    sub_9 = sub_14;
+    sub_10 = false;
   };
-  sub_8 = sub_9;
-  sub_16 = sub_14;
-  if (controller_v_17) {
-    v_20 = sub_16;
-  } else {
-    v_20 = sub_10;
-  };
+  sub_9 = sub_10;
   if (controller_ck_1) {
-    v_21 = v_20;
+    sub_8 = v_25;
   } else {
-    v_21 = sub_8;
+    sub_8 = sub_9;
+  };
+  if (controller_c_motor1) {
+    v_30 = v_29;
+  } else {
+    v_30 = sub_8;
   };
   if (controller_c_motor2) {
-    sub_1 = v_19;
+    sub_1 = v_30;
   } else {
-    sub_1 = v_21;
+    sub_1 = sub_8;
   };
-  sub_21 = sub_13;
-  if (controller_v_58) {
-    sub_20 = sub_21;
-  } else {
-    sub_20 = false;
-  };
+  sub_15 = true;
   if (controller_v_57) {
-    v_14 = false;
+    v_21 = sub_5;
   } else {
-    v_14 = sub_20;
+    v_21 = sub_15;
   };
   if (controller_c_move) {
-    sub_19 = sub_20;
+    v_22 = sub_15;
   } else {
-    sub_19 = v_14;
+    v_22 = v_21;
+  };
+  if (controller_v_58) {
+    sub_14 = v_22;
+  } else {
+    sub_14 = sub_4;
   };
   if (controller_v_17) {
-    v_22 = false;
+    v_31 = sub_7;
   } else {
-    v_22 = sub_19;
+    v_31 = sub_14;
+  };
+  if (controller_v_18) {
+    sub_13 = sub_14;
+  } else {
+    sub_13 = sub_6;
+  };
+  sub_12 = sub_13;
+  if (controller_ck_1) {
+    v_32 = v_31;
+  } else {
+    v_32 = sub_12;
+  };
+  if (controller_v_57) {
+    v = false;
+  } else {
+    v = sub_15;
+  };
+  if (controller_c_move) {
+    v_19 = sub_15;
+  } else {
+    v_19 = v;
+  };
+  if (controller_v_58) {
+    sub_19 = v_19;
+  } else {
+    sub_19 = false;
+  };
+  if (controller_v_17) {
+    v_20 = false;
+  } else {
+    v_20 = sub_19;
   };
   if (controller_v_18) {
     sub_18 = sub_19;
@@ -409,48 +411,22 @@ void Controller_controller__controller_controller_controller_c_motor3_step(
   };
   sub_17 = sub_18;
   if (controller_ck_1) {
-    v_23 = v_22;
+    sub_16 = v_20;
   } else {
-    v_23 = sub_17;
+    sub_16 = sub_17;
   };
-  if (controller_v_58) {
-    sub_25 = sub_21;
+  if (controller_c_motor1) {
+    v_33 = v_32;
   } else {
-    sub_25 = sub_12;
-  };
-  if (controller_v_57) {
-    v = sub_12;
-  } else {
-    v = sub_25;
-  };
-  if (controller_c_move) {
-    sub_24 = sub_25;
-  } else {
-    sub_24 = v;
-  };
-  if (controller_v_17) {
-    v_24 = sub_16;
-  } else {
-    v_24 = sub_24;
-  };
-  if (controller_v_18) {
-    sub_23 = sub_24;
-  } else {
-    sub_23 = sub_14;
-  };
-  sub_22 = sub_23;
-  if (controller_ck_1) {
-    v_25 = v_24;
-  } else {
-    v_25 = sub_22;
+    v_33 = sub_16;
   };
   if (controller_c_motor2) {
-    v_26 = v_23;
+    v_34 = v_33;
   } else {
-    v_26 = v_25;
+    v_34 = sub_16;
   };
   if (p_controller_c_motor3) {
-    sub_0 = v_26;
+    sub_0 = v_34;
   } else {
     sub_0 = sub_1;
   };
@@ -468,11 +444,15 @@ void Controller_controller__controller_controller_controller_c_motor2_step(
   int p_controller_c_move, int controller_c_motor1, int controller_c_move,
   Controller_controller__controller_controller_controller_c_motor2_out* _out) {
   
-  int v_31;
-  int v_30;
-  int v_29;
-  int v_28;
-  int v_27;
+  int v_43;
+  int v_42;
+  int v_41;
+  int v_40;
+  int v_39;
+  int v_38;
+  int v_37;
+  int v_36;
+  int v_35;
   int v;
   int sub_0;
   int sub_1;
@@ -486,99 +466,95 @@ void Controller_controller__controller_controller_controller_c_motor2_step(
   int sub_9;
   int sub_10;
   int sub_11;
-  int sub_12;
-  int sub_13;
-  int sub_14;
-  int sub_15;
+  sub_5 = true;
+  sub_4 = sub_5;
   sub_7 = false;
-  if (controller_c_motor1) {
-    sub_6 = sub_7;
-  } else {
-    sub_6 = false;
-  };
-  if (controller_v_58) {
-    sub_5 = sub_7;
-  } else {
-    sub_5 = sub_6;
-  };
-  if (controller_v_57) {
-    v_28 = sub_6;
-  } else {
-    v_28 = sub_5;
-  };
-  if (controller_c_move) {
-    sub_4 = sub_5;
-  } else {
-    sub_4 = v_28;
-  };
-  if (controller_v_58) {
-    sub_9 = false;
-  } else {
-    sub_9 = sub_6;
-  };
-  if (controller_v_57) {
-    v_27 = sub_6;
-  } else {
-    v_27 = sub_9;
-  };
-  if (controller_c_move) {
-    sub_8 = sub_9;
-  } else {
-    sub_8 = v_27;
-  };
-  if (controller_v_18) {
-    sub_3 = sub_4;
-  } else {
-    sub_3 = sub_8;
-  };
-  sub_2 = sub_3;
-  sub_10 = sub_8;
-  if (controller_v_17) {
-    v_29 = sub_10;
-  } else {
-    v_29 = sub_4;
-  };
-  if (controller_ck_1) {
-    sub_1 = v_29;
-  } else {
-    sub_1 = sub_2;
-  };
-  sub_15 = true;
-  if (controller_v_58) {
-    sub_14 = sub_15;
-  } else {
-    sub_14 = sub_6;
-  };
-  if (controller_v_57) {
-    v = sub_6;
-  } else {
-    v = sub_14;
-  };
-  if (controller_c_move) {
-    sub_13 = sub_14;
-  } else {
-    sub_13 = v;
-  };
-  if (controller_v_17) {
-    v_30 = sub_10;
-  } else {
-    v_30 = sub_13;
-  };
-  if (controller_v_18) {
-    sub_12 = sub_13;
-  } else {
-    sub_12 = sub_8;
-  };
-  sub_11 = sub_12;
-  if (controller_ck_1) {
-    v_31 = v_30;
-  } else {
-    v_31 = sub_11;
-  };
   if (p_controller_c_motor2) {
-    sub_0 = v_31;
+    sub_6 = sub_5;
   } else {
-    sub_0 = sub_1;
+    sub_6 = sub_7;
+  };
+  if (controller_v_57) {
+    v_38 = sub_5;
+  } else {
+    v_38 = sub_6;
+  };
+  if (controller_c_move) {
+    v_39 = sub_6;
+  } else {
+    v_39 = v_38;
+  };
+  if (controller_v_58) {
+    sub_3 = v_39;
+  } else {
+    sub_3 = sub_4;
+  };
+  if (controller_v_57) {
+    v_36 = sub_5;
+  } else {
+    v_36 = false;
+  };
+  if (controller_c_move) {
+    v_37 = false;
+  } else {
+    v_37 = v_36;
+  };
+  if (controller_v_58) {
+    sub_8 = v_37;
+  } else {
+    sub_8 = sub_4;
+  };
+  if (controller_v_17) {
+    v_40 = sub_8;
+  } else {
+    v_40 = sub_3;
+  };
+  if (controller_v_18) {
+    sub_2 = sub_3;
+  } else {
+    sub_2 = sub_8;
+  };
+  sub_1 = sub_2;
+  if (controller_ck_1) {
+    v_41 = v_40;
+  } else {
+    v_41 = sub_1;
+  };
+  if (controller_v_57) {
+    v = false;
+  } else {
+    v = sub_6;
+  };
+  if (controller_c_move) {
+    v_35 = sub_6;
+  } else {
+    v_35 = v;
+  };
+  if (controller_v_58) {
+    sub_11 = v_35;
+  } else {
+    sub_11 = false;
+  };
+  if (controller_v_17) {
+    v_42 = false;
+  } else {
+    v_42 = sub_11;
+  };
+  if (controller_v_18) {
+    sub_10 = sub_11;
+  } else {
+    sub_10 = false;
+  };
+  sub_9 = sub_10;
+  if (controller_ck_1) {
+    v_43 = v_42;
+  } else {
+    v_43 = sub_9;
+  };
+  if (controller_c_motor1) {
+    sub_0 = v_41;
+  } else {
+    sub_0 = v_43;
   };
   _out->controller_c_motor2 = sub_0;;
 }
@@ -594,8 +570,12 @@ void Controller_controller__controller_controller_controller_c_motor1_step(
   int p_controller_c_move, int controller_c_move,
   Controller_controller__controller_controller_controller_c_motor1_out* _out) {
   
-  int v_33;
-  int v_32;
+  int v_49;
+  int v_48;
+  int v_47;
+  int v_46;
+  int v_45;
+  int v_44;
   int v;
   int sub_0;
   int sub_1;
@@ -606,51 +586,74 @@ void Controller_controller__controller_controller_controller_c_motor1_step(
   int sub_6;
   int sub_7;
   int sub_8;
-  sub_5 = true;
-  sub_6 = p_controller_c_motor1;
+  int sub_9;
+  int sub_10;
+  int sub_11;
+  sub_6 = true;
+  sub_5 = sub_6;
+  sub_7 = false;
+  if (controller_v_57) {
+    v_45 = sub_6;
+  } else {
+    v_45 = sub_7;
+  };
+  if (controller_c_move) {
+    v_46 = sub_7;
+  } else {
+    v_46 = v_45;
+  };
   if (controller_v_58) {
-    sub_4 = sub_6;
+    sub_4 = v_46;
   } else {
     sub_4 = sub_5;
   };
   if (controller_v_57) {
-    v_32 = sub_5;
+    v = sub_6;
   } else {
-    v_32 = sub_4;
+    v = false;
   };
   if (controller_c_move) {
-    sub_3 = sub_4;
+    v_44 = false;
   } else {
-    sub_3 = v_32;
+    v_44 = v;
   };
   if (controller_v_58) {
-    sub_8 = false;
+    sub_8 = v_44;
   } else {
     sub_8 = sub_5;
   };
-  if (controller_v_57) {
-    v = sub_5;
+  if (controller_v_18) {
+    sub_3 = sub_4;
   } else {
-    v = sub_8;
+    sub_3 = sub_8;
   };
-  if (controller_c_move) {
-    sub_7 = sub_8;
-  } else {
-    sub_7 = v;
-  };
+  sub_2 = sub_3;
+  sub_9 = sub_8;
   if (controller_v_17) {
-    v_33 = sub_7;
+    v_48 = sub_9;
+    v_47 = sub_9;
   } else {
-    v_33 = sub_3;
+    v_48 = sub_5;
+    v_47 = sub_4;
+  };
+  if (controller_ck_1) {
+    sub_1 = v_47;
+  } else {
+    sub_1 = sub_2;
   };
   if (controller_v_18) {
-    sub_2 = sub_3;
+    sub_11 = sub_5;
   } else {
-    sub_2 = sub_7;
+    sub_11 = sub_8;
   };
-  sub_1 = sub_2;
+  sub_10 = sub_11;
   if (controller_ck_1) {
-    sub_0 = v_33;
+    v_49 = v_48;
+  } else {
+    v_49 = sub_10;
+  };
+  if (p_controller_c_motor1) {
+    sub_0 = v_49;
   } else {
     sub_0 = sub_1;
   };
@@ -668,7 +671,7 @@ void Controller_controller__controller_controller_controller_c_move_step(
   int p_controller_c_move,
   Controller_controller__controller_controller_controller_c_move_out* _out) {
   
-  int v_34;
+  int v_50;
   int v;
   int sub_0;
   int sub_1;
@@ -676,25 +679,22 @@ void Controller_controller__controller_controller_controller_c_move_step(
   int sub_3;
   int sub_4;
   int sub_5;
-  int sub_6;
   sub_4 = p_controller_c_move;
   sub_3 = sub_4;
-  if (controller_v_58) {
-    v = false;
-    sub_6 = false;
-  } else {
-    v = sub_3;
-    sub_6 = sub_3;
-  };
   if (controller_v_57) {
+    v = false;
+  } else {
+    v = false;
+  };
+  if (controller_v_58) {
     sub_5 = v;
   } else {
-    sub_5 = sub_6;
+    sub_5 = sub_3;
   };
   if (controller_v_17) {
-    v_34 = sub_5;
+    v_50 = sub_5;
   } else {
-    v_34 = sub_3;
+    v_50 = sub_3;
   };
   if (controller_v_18) {
     sub_2 = sub_3;
@@ -703,7 +703,7 @@ void Controller_controller__controller_controller_controller_c_move_step(
   };
   sub_1 = sub_2;
   if (controller_ck_1) {
-    sub_0 = v_34;
+    sub_0 = v_50;
   } else {
     sub_0 = sub_1;
   };

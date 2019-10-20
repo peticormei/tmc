@@ -1,69 +1,61 @@
-
-node obstacle(sensor: int) returns (out: bool)
+node obstacle(dist: int) returns (obs: bool)
 let 
 	automaton
 		state OBSTACLE do
-			out = true;
-			unless (sensor > 45) then NO_OBSTACLE
+			obs = true;
+			unless (dist > 45) then NO_OBSTACLE
 		state NO_OBSTACLE do
-			out = false;
-			unless (sensor <= 45) then OBSTACLE
-
+			obs = false;
+			unless (dist <= 45) then OBSTACLE
 	end
 tel
 
-node motor(c_motor: bool) returns (mode: bool; velocity: int)
+node motor(c: bool) returns (mode, velocity: int)
 let 
 	automaton
-        state FORWARD_STATE do
-            mode = true;
-            velocity = 255;
-            unless not c_motor then BACKWARD_STATE
-        state BACKWARD_STATE do
-            mode = false;
-            velocity = 100;
-            unless c_motor then FORWARD_STATE
-    end
+        	state FORWARD do
+            		mode = 1;
+            		velocity = 255;
+            		unless not c then BACKWARD
+        	state BACKWARD do
+            		mode = 2;
+            		velocity = 255;
+            		unless c then FORWARD
+    	end
 tel
 
-node moving_or_turning(c: bool) returns (turning: bool; ombc:int)
+node movement(c: bool) returns (turning: bool; ombc:int)
 	var last mbc:int = 0; 
 let
 	ombc = mbc;
 	automaton
-		state MOVING_STATE do
+		state MOVING do
 			mbc = 0;
 			turning = false;			
-			unless not c then STURNING_STATE
-
-		state STURNING_STATE do
+			unless not c then STURNING
+		state STURNING do
 			mbc = 0;
 			turning = true;
-			
-			until not c then TURNING_STATE | c then MOVING_STATE
-
-		state TURNING_STATE do
+			until not c then TURNING | c then MOVING
+		state TURNING do
 			mbc = last mbc + 1;
 			turning = true;
-			
-			unless c & (12 = last mbc) then STURNING_STATE
+			unless c & (12 = last mbc) then STURNING
 	end
 tel
 
-node controller(obs_sensor: int) returns (obs, turning, motor1, motor2, motor3, motor4: bool; cont, vel1, vel2, vel3, vel4: int)
+node controller(distance: int) returns (obs, turning: bool; motor1, motor2, motor3, motor4, vel1, vel2, vel3, vel4, cont: int)
 	contract 
 		var
 			rule: bool;
 		let
-            rule = not obs & not turning or (turning & (motor1=true & motor2=false & motor3=true & motor4=false));
+            		rule = not obs & not turning or (turning & (motor1=1 & motor2=1 & motor3=2 & motor4=2));
 		tel
-
 			enforce rule
 			with (c_move, c_motor1, c_motor2, c_motor3, c_motor4: bool)
-
 		let
-			obs = inlined obstacle(obs_sensor);
-			(turning, cont) = inlined moving_or_turning(c_move);
+			obs = inlined obstacle(distance);
+			(turning, cont) = inlined movement(c_move);
 			(motor1, vel1) =  inlined motor(c_motor1);
 			(motor2, vel2) =  inlined motor(c_motor2);
 			(motor3, vel3) =  inlined motor(c_motor3);
