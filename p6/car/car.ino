@@ -1,12 +1,15 @@
 #include <AFMotor.h>
 #include "controller_controller.c"
-#include "car.c"
+#include "model.c"
 
 #define trigPin A0
 #define echoPin A1
 
-Car__controller_mem mem;
-Car__controller_out _res;
+Model__controller_mem mem;
+Model__controller_out _res;
+
+int turningItr = 0;
+int directionEvent = 1;
 
 AF_DCMotor motor1(1);
 AF_DCMotor motor2(2);
@@ -25,41 +28,56 @@ void loop() {
   Serial.println("Distancia");
   Serial.println(obs_sensor);
   
-  Car__controller_step(obs_sensor, &_res, &mem);
+  Serial.println("Obstaculo");
+  Serial.println(_res.obs);
+  if (_res.obs) {
+    if (turningItr == 0) {
+      turningItr = random(1, 12);
+      Serial.println("set turningItr");
+      Serial.println(turningItr);
+    }
 
-  Serial.println("Motor 1");
-  Serial.println(_res.vel1);
-  Serial.println(_res.motor1);
-  Serial.println("Motor 2");
-  Serial.println(_res.vel2);
-  Serial.println(_res.motor2);
-  Serial.println("Motor 3");
-  Serial.println(_res.vel3);
-  Serial.println(_res.motor3);
-  Serial.println("Motor 4");
-  Serial.println(_res.vel4);
-  Serial.println(_res.motor4);
+    // 2 TURNING
+    // 1 MOVING
+    directionEvent = 2;
+  }
 
-  Serial.println(FORWARD);
-  Serial.println(BACKWARD);
-  Serial.println(RELEASE);
+  Model__controller_step(obs_sensor, directionEvent, &_res, &mem);
 
-  motor1.run(_res.motor1);
-  motor1.setSpeed(_res.vel1);
+  Serial.println("Motor ESQ");
+  Serial.println(_res.motor_speed_left);
+  Serial.println(_res.motor_dir_left);
+  Serial.println("Motor DIR");
+  Serial.println(_res.motor_speed_right);
+  Serial.println(_res.motor_dir_right);
+
+  motor1.run(_res.motor_dir_left);
+  motor1.setSpeed(_res.motor_speed_left + 155);
+
+  motor2.run(_res.motor_dir_left);
+  motor2.setSpeed(_res.motor_speed_left + 155);
   
-  motor2.run(_res.motor2);
-  motor2.setSpeed(_res.vel2);
+  motor3.run(_res.motor_dir_right);
+  motor3.setSpeed(_res.motor_speed_right + 155);
   
-  motor3.run(_res.motor3);
-  motor3.setSpeed(_res.vel3);
-  
-  motor4.run(_res.motor4);
-  motor4.setSpeed(_res.vel4);
+  motor4.run(_res.motor_dir_right);
+  motor4.setSpeed(_res.motor_speed_right + 155);
 
   Serial.println("\n");
+
+  if (turningItr >= 1) {
+    turningItr--;
+    Serial.println("-- turningItr");
+    Serial.println(turningItr);
+  }
+  else {
+    directionEvent = 1;
+  }
+
+  Serial.println("directionEvent");
+  Serial.println(directionEvent);
   delay(10);
 }
-
 
 int getDistance(){ 
   digitalWrite(trigPin, LOW);

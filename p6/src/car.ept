@@ -49,7 +49,7 @@ node controller(distance: int) returns (obs, turning: bool; motor1, motor2, moto
 		var
 			rule: bool;
 		let
-            		rule = not obs & not turning or (turning & (motor1=1 & motor2=1 & motor3=2 & motor4=2));
+			rule = not obs & not turning or (turning & (motor1=1 & motor2=1 & motor3=2 & motor4=2));
 		tel
 			enforce rule
 			with (c_move, c_motor1, c_motor2, c_motor3, c_motor4: bool)
