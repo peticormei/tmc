@@ -1,3 +1,8 @@
+(*
+    until => executa o estado em que está e transiciona para outro estado
+    unless => transiciona para outro estado e executa o novo estado
+*)
+
 node obstacle(dist: int) returns (obs: bool)
 let 
 	automaton
@@ -10,54 +15,35 @@ let
 	end
 tel
 
-node motor(c: bool) returns (mode, velocity: int)
-let 
+node motor(event_dir: int; cntrl_turn: bool) returns (mode, velocity: int)
+let
 	automaton
 		state FORWARD do
 			mode = 1;
 			velocity = 255;
-			unless not c then BACKWARD
+			unless ((event_dir=2) or (not cntrl_turn)) then BACKWARD
 		state BACKWARD do
 			mode = 2;
 			velocity = 255;
-			unless c then FORWARD
+			unless ((event_dir=1) & cntrl_turn) then FORWARD
 	end
 tel
 
-node movement(event_dir: int; has_obs_l, has_obs_r, cntrl_turn_l, cntrl_turn_r: bool) returns (state_dir: int)
-let
-	automaton
-		state AHEAD do
-			state_dir = 1;
-			unless ((event_dir = 2 & (not has_obs_l)) or (not cntrl_turn_l)) then TURN_LEFT
-				| ((event_dir = 3 & (not has_obs_r)) or (not cntrl_turn_r)) then TURN_RIGHT
-		state TURN_LEFT do
-			state_dir = 2;
-			unless (event_dir = 1 & ((not has_obs_l) & (not has_obs_r))) then AHEAD
-				| ((event_dir = 3 & (not has_obs_r)) or (cntrl_turn_r)) then TURN_RIGHT
-		state TURN_RIGHT do
-			state_dir = 3;
-			unless (event_dir = 1 & ((not has_obs_l) & (not has_obs_r))) then AHEAD
-				| ((event_dir = 2 & (not has_obs_l)) or (cntrl_turn_l)) then TURN_LEFT
-	end
-tel
+node controller(distance_left, distance_right, event_dir_left, event_dir_right: int) returns (obs_left, obs_right: bool; motor_mode_left, motor_mode_right, motor_speed_left, motor_speed_right: int)
+contract
+	var
+		rule1, rule2, rule3: bool;
+	let
+		rule1 = not (obs_left & not (motor_mode_right=2)) or motor_mode_right=2;
+		rule2 = not (obs_right & not (motor_mode_left=2)) or motor_mode_left=2;
+		rule3 = not (obs_right & obs_left) or (motor_mode_left=2 & motor_mode_right=2); 
+	tel
+		enforce (rule1) & (rule2) & (rule3)
+		with (cntrl_turn_l, cntrl_turn_r: bool)
+	let
+		obs_left = inlined obstacle(distance_left);
+		(motor_mode_left, motor_speed_left) = inlined motor(event_dir_left, cntrl_turn_r);
 
-node controller(distance_left, distance_right, event_dir: int) returns (obs_left, obs_right: bool; state_dir, motor1, motor2, vel1, vel2: int)
-	contract
-		var
-			rule1, rule2, rule3, rule4: bool;
-		let
-			rule1 = not (obs_left & not (state_dir=3)) or state_dir=3;
-			rule2 = true;
-			rule3 = not (state_dir=2) or (motor1=2 & motor2=1);
-			rule4 = not (state_dir=3) or (motor1=1 & motor2=2);
-		tel
-			enforce (rule1) & (rule2) & (rule3) & (rule4)
-			with (cntrl_turn_l, cntrl_turn_r, c_motor1, c_motor2: bool)
-		let
-			obs_left = inlined obstacle(distance_left);
-			obs_right = inlined obstacle(distance_right);
-			state_dir = inlined movement(event_dir, obs_left, obs_right, cntrl_turn_l, cntrl_turn_r);
-			(motor1, vel1) = inlined motor(c_motor1);
-			(motor2, vel2) = inlined motor(c_motor2);
-		tel
+		obs_right = inlined obstacle(distance_right);
+		(motor_mode_right, motor_speed_right) = inlined motor(event_dir_right, cntrl_turn_l);
+	tel
