@@ -1,5 +1,5 @@
 
-SIM_PROG=car
+SIM_PROG=model
 SIM_NODE=controller
 CONTRACT_NODE=controller
 
