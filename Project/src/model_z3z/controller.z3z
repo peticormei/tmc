@@ -1,0 +1,222 @@
+% --- Generated the 4/11/2019 at 13:29 --- %
+% --- heptagon compiler, version 1.03.00 (compiled sun. oct. 20 0:47:43 CET 2019) --- %
+% --- Command line: /home/opam/.opam/4.02/bin/heptc -target c -target z3z -s controller model.ept --- %
+
+set_reorder(2);read("Property.lib");read("Synthesis.lib");read("Verif_Determ.lib");read("Simul.lib");read("Synthesis_Partial_order.lib");read("Orbite.lib");
+% -- dependencies --- %
+
+% ---------- process controller ---------- %
+
+declare(controller_v_22, controller_v_23, controller_v_24, controller_v_26,
+        controller_v_29, controller_v_30, controller_v_31, controller_v_33,
+        controller_cntrl_turn_r, controller_cntrl_turn_l, controller_ck_1,
+        controller_pnr_3, controller_ck_4_1, controller_pnr_2,
+        controller_ck_6_1, controller_pnr_1, controller_ck_8_1,
+        controller_pnr, controller_error_state);
+conditions : [controller_v_22, controller_v_23, controller_v_24,
+              controller_v_26, controller_v_29, controller_v_30,
+              controller_v_31, controller_v_33, controller_cntrl_turn_r,
+              controller_cntrl_turn_l];
+states : [controller_ck_1, controller_pnr_3, controller_ck_4_1,
+          controller_pnr_2, controller_ck_6_1, controller_pnr_1,
+          controller_ck_8_1, controller_pnr, controller_error_state];
+controllables : [controller_cntrl_turn_r, controller_cntrl_turn_l];
+evolutions : [];
+initialisations : [];
+controller_cntrl_turn : controller_cntrl_turn_r;
+controller_cntrl_turn_1 : controller_cntrl_turn_l;
+controller_s_3_St_5_NO_OBSTACLE_1 : ((-1 when controller_v_22) default 1);
+controller_r_3_St_5_NO_OBSTACLE : ((1 when controller_v_22)
+  default controller_pnr_3);
+controller_s_3_St_5_OBSTACLE_1 : ((1 when controller_v_23) default -1);
+controller_s_3_1 : ((controller_s_3_St_5_NO_OBSTACLE_1 when controller_ck_1)
+  default controller_s_3_St_5_OBSTACLE_1);
+controller_r_3_St_5_OBSTACLE : ((1 when controller_v_23)
+  default controller_pnr_3);
+controller_r_3 : ((controller_r_3_St_5_NO_OBSTACLE when controller_ck_1)
+  default controller_r_3_St_5_OBSTACLE);
+controller_ck_3_1 : controller_s_3_1;
+controller_ns_3_St_5_NO_OBSTACLE_1 : 1;
+controller_nr_3_St_5_NO_OBSTACLE : -1;
+controller_obs_St_5_NO_OBSTACLE : -1;
+controller_ns_3_St_5_OBSTACLE_1 : -1;
+controller_ns_3_1 : ((controller_ns_3_St_5_NO_OBSTACLE_1
+  when controller_ck_3_1) default controller_ns_3_St_5_OBSTACLE_1);
+controller_nr_3_St_5_OBSTACLE : -1;
+controller_nr_3 : ((controller_nr_3_St_5_NO_OBSTACLE when controller_ck_3_1)
+  default controller_nr_3_St_5_OBSTACLE);
+controller_obs_St_5_OBSTACLE : 1;
+controller_obs : ((controller_obs_St_5_NO_OBSTACLE when controller_ck_3_1)
+  default controller_obs_St_5_OBSTACLE);
+controller_obs_left : controller_obs;
+controller_v_25 : (controller_v_24 and controller_cntrl_turn);
+controller_s_2_St_4_BACKWARD_1 : ((-1 when controller_v_25) default 1);
+controller_r_2_St_4_BACKWARD : ((1 when controller_v_25)
+  default controller_pnr_2);
+controller_v_27 : (not controller_cntrl_turn);
+controller_v_28 : (controller_v_26 or controller_v_27);
+controller_s_2_St_4_FORWARD_1 : ((1 when controller_v_28) default -1);
+controller_s_2_1 : ((controller_s_2_St_4_BACKWARD_1 when controller_ck_4_1)
+  default controller_s_2_St_4_FORWARD_1);
+controller_r_2_St_4_FORWARD : ((1 when controller_v_28)
+  default controller_pnr_2);
+controller_r_2 : ((controller_r_2_St_4_BACKWARD when controller_ck_4_1)
+  default controller_r_2_St_4_FORWARD);
+controller_ck_5_1 : controller_s_2_1;
+controller_ns_2_St_4_BACKWARD_1 : 1;
+controller_nr_2_St_4_BACKWARD : -1;
+controller_velocity_St_4_BACKWARD : a_const(255);
+controller_mode_St_4_BACKWARD : a_const(2);
+controller_ns_2_St_4_FORWARD_1 : -1;
+controller_ns_2_1 : ((controller_ns_2_St_4_BACKWARD_1 when controller_ck_5_1)
+  default controller_ns_2_St_4_FORWARD_1);
+controller_nr_2_St_4_FORWARD : -1;
+controller_nr_2 : ((controller_nr_2_St_4_BACKWARD when controller_ck_5_1)
+  default controller_nr_2_St_4_FORWARD);
+controller_velocity_St_4_FORWARD : a_const(255);
+controller_velocity : a_part(controller_ck_5_1, a_const(0),
+                             controller_velocity_St_4_BACKWARD,
+                             controller_velocity_St_4_FORWARD);
+controller_mode_St_4_FORWARD : a_const(1);
+controller_mode : a_part(controller_ck_5_1, a_const(0),
+                         controller_mode_St_4_BACKWARD,
+                         controller_mode_St_4_FORWARD);
+controller_motor_mode_left : controller_mode;
+controller_motor_speed_left : controller_velocity;
+controller_s_1_St_3_NO_OBSTACLE_1 : ((-1 when controller_v_29) default 1);
+controller_r_1_St_3_NO_OBSTACLE : ((1 when controller_v_29)
+  default controller_pnr_1);
+controller_s_1_St_3_OBSTACLE_1 : ((1 when controller_v_30) default -1);
+controller_s_1_1 : ((controller_s_1_St_3_NO_OBSTACLE_1
+  when controller_ck_6_1) default controller_s_1_St_3_OBSTACLE_1);
+controller_r_1_St_3_OBSTACLE : ((1 when controller_v_30)
+  default controller_pnr_1);
+controller_r_1 : ((controller_r_1_St_3_NO_OBSTACLE when controller_ck_6_1)
+  default controller_r_1_St_3_OBSTACLE);
+controller_ck_7_1 : controller_s_1_1;
+controller_ns_1_St_3_NO_OBSTACLE_1 : 1;
+controller_nr_1_St_3_NO_OBSTACLE : -1;
+controller_obs_1_St_3_NO_OBSTACLE : -1;
+controller_ns_1_St_3_OBSTACLE_1 : -1;
+controller_ns_1_1 : ((controller_ns_1_St_3_NO_OBSTACLE_1
+  when controller_ck_7_1) default controller_ns_1_St_3_OBSTACLE_1);
+controller_nr_1_St_3_OBSTACLE : -1;
+controller_nr_1 : ((controller_nr_1_St_3_NO_OBSTACLE when controller_ck_7_1)
+  default controller_nr_1_St_3_OBSTACLE);
+controller_obs_1_St_3_OBSTACLE : 1;
+controller_obs_1 : ((controller_obs_1_St_3_NO_OBSTACLE
+  when controller_ck_7_1) default controller_obs_1_St_3_OBSTACLE);
+controller_obs_right : controller_obs_1;
+controller_v_32 : (controller_v_31 and controller_cntrl_turn_1);
+controller_s_St_2_BACKWARD_1 : ((-1 when controller_v_32) default 1);
+controller_r_St_2_BACKWARD : ((1 when controller_v_32)
+  default controller_pnr);
+controller_v_34 : (not controller_cntrl_turn_1);
+controller_v_35 : (controller_v_33 or controller_v_34);
+controller_s_St_2_FORWARD_1 : ((1 when controller_v_35) default -1);
+controller_s_1_2 : ((controller_s_St_2_BACKWARD_1 when controller_ck_8_1)
+  default controller_s_St_2_FORWARD_1);
+controller_r_St_2_FORWARD : ((1 when controller_v_35)
+  default controller_pnr);
+controller_r : ((controller_r_St_2_BACKWARD when controller_ck_8_1)
+  default controller_r_St_2_FORWARD);
+controller_ck_9_1 : controller_s_1_2;
+controller_ns_St_2_BACKWARD_1 : 1;
+controller_nr_St_2_BACKWARD : -1;
+controller_velocity_1_St_2_BACKWARD : a_const(255);
+controller_mode_1_St_2_BACKWARD : a_const(2);
+controller_ns_St_2_FORWARD_1 : -1;
+controller_ns_1_2 : ((controller_ns_St_2_BACKWARD_1 when controller_ck_9_1)
+  default controller_ns_St_2_FORWARD_1);
+controller_nr_St_2_FORWARD : -1;
+controller_nr : ((controller_nr_St_2_BACKWARD when controller_ck_9_1)
+  default controller_nr_St_2_FORWARD);
+controller_velocity_1_St_2_FORWARD : a_const(255);
+controller_velocity_1 : a_part(controller_ck_9_1, a_const(0),
+                               controller_velocity_1_St_2_BACKWARD,
+                               controller_velocity_1_St_2_FORWARD);
+controller_mode_1_St_2_FORWARD : a_const(1);
+controller_mode_1 : a_part(controller_ck_9_1, a_const(0),
+                           controller_mode_1_St_2_BACKWARD,
+                           controller_mode_1_St_2_FORWARD);
+controller_motor_mode_right : controller_mode_1;
+controller_motor_speed_right : controller_velocity_1;
+initialisations : concat(initialisations, [(controller_ck_1 = -1)]);
+evolutions : concat(evolutions, [(controller_ns_3_1 default controller_ck_1)]);
+initialisations : concat(initialisations, [(controller_pnr_3 = -1)]);
+evolutions : concat(evolutions, [(controller_nr_3 default controller_pnr_3)]);
+initialisations : concat(initialisations, [(controller_ck_4_1 = -1)]);
+evolutions : concat(evolutions,
+                    [(controller_ns_2_1 default controller_ck_4_1)]);
+initialisations : concat(initialisations, [(controller_pnr_2 = -1)]);
+evolutions : concat(evolutions, [(controller_nr_2 default controller_pnr_2)]);
+initialisations : concat(initialisations, [(controller_ck_6_1 = -1)]);
+evolutions : concat(evolutions,
+                    [(controller_ns_1_1 default controller_ck_6_1)]);
+initialisations : concat(initialisations, [(controller_pnr_1 = -1)]);
+evolutions : concat(evolutions, [(controller_nr_1 default controller_pnr_1)]);
+initialisations : concat(initialisations, [(controller_ck_8_1 = -1)]);
+evolutions : concat(evolutions,
+                    [(controller_ns_1_2 default controller_ck_8_1)]);
+initialisations : concat(initialisations, [(controller_pnr = -1)]);
+evolutions : concat(evolutions, [(controller_nr default controller_pnr)]);
+controller_v_19 : (a_iminv(controller_motor_mode_right, 2) + 1);
+controller_v_15 : (a_iminv(controller_motor_mode_right, 2) + 1);
+controller_v_16 : (not controller_v_15);
+controller_v_17 : (controller_obs_left and controller_v_16);
+controller_v_18 : (not controller_v_17);
+controller_rule1 : (controller_v_18 or controller_v_19);
+controller_v_14 : (a_iminv(controller_motor_mode_left, 2) + 1);
+controller_v_10 : (a_iminv(controller_motor_mode_left, 2) + 1);
+controller_v_11 : (not controller_v_10);
+controller_v_12 : (controller_obs_right and controller_v_11);
+controller_v_13 : (not controller_v_12);
+controller_rule2 : (controller_v_13 or controller_v_14);
+controller_v_20 : (controller_rule1 and controller_rule2);
+controller_v_8 : (a_iminv(controller_motor_mode_right, 2) + 1);
+controller_v_7 : (a_iminv(controller_motor_mode_left, 2) + 1);
+controller_v_9 : (controller_v_7 and controller_v_8);
+controller_v : (controller_obs_right and controller_obs_left);
+controller_v_6 : (not controller_v);
+controller_rule3 : (controller_v_6 or controller_v_9);
+controller_v_21 : (controller_v_20 and controller_rule3);
+controller_assume : 1;
+controller_guarantee : controller_v_21;
+initialisations : concat(initialisations, [(controller_error_state = 1)]);
+evolutions : concat(evolutions, [controller_guarantee]);
+constraints : [((controller_v_22^2) = 1), ((controller_v_23^2) = 1),
+               ((controller_v_24^2) = 1), ((controller_v_26^2) = 1),
+               ((controller_v_29^2) = 1), ((controller_v_30^2) = 1),
+               ((controller_v_31^2) = 1), ((controller_v_33^2) = 1),
+               ((controller_cntrl_turn_r^2) = 1),
+               ((controller_cntrl_turn_l^2) = 1), (controller_assume = 1)];
+
+% --- outputs : [controller_obs_left, controller_obs_right,
+                 controller_motor_mode_left, controller_motor_mode_right,
+                 controller_motor_speed_left, controller_motor_speed_right] --- %
+controller : processus(conditions, states, evolutions, initialisations,
+                       [gen(constraints)], controllables);
+controller_init : initial(controller);
+controller : S_Security(controller,B_True(controller,controller_error_state));
+dcs_result : equal(controller_init,initial(controller));
+if dcs_result then
+    print("controller: synthesis succeeded.")
+else
+    print("controller: synthesis failed.");
+
+if dcs_result then
+    print("Triangulation and controller generation...")
+else
+    quit(1);
+declare(p_controller_cntrl_turn_r, p_controller_cntrl_turn_l);
+phantom_vars : [p_controller_cntrl_turn_r, p_controller_cntrl_turn_l];
+controller_triang : Triang(constraint(controller),controllables,phantom_vars);
+controller_inputs : [controller_v_22, controller_v_23, controller_v_24,
+                     controller_v_26, controller_v_29, controller_v_30,
+                     controller_v_31, controller_v_33, controller_ck_1,
+                     controller_pnr_3, controller_ck_4_1, controller_pnr_2,
+                     controller_ck_6_1, controller_pnr_1, controller_ck_8_1,
+                     controller_pnr, p_controller_cntrl_turn_r,
+                     p_controller_cntrl_turn_l];
+heptagon_controller("controller_controller.ept","controller",controller_inputs,controllables,controller_triang);
+

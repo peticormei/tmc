@@ -4,14 +4,13 @@
 
 #define trigPinLeft A0
 #define echoPinLeft A1
-
 #define trigPinRight A4
 #define echoPinRight A5
 
 Model__controller_mem mem;
 Model__controller_out _res;
 
-int turningItr = 0;
+int randomWalkItr = 1;
 int directionEventLeft = 1;
 int directionEventRight = 1;
 
@@ -31,52 +30,12 @@ void setup() {
 }
 
 void loop() {
-  int obs_sensor_left = getDistanceLeft();
-  int obs_sensor_right = getDistanceRight();
+  int obs_sensor_left = sensorLimit(getDistance(trigPinLeft, echoPinLeft));
+  int obs_sensor_right = sensorLimit(getDistance(trigPinRight, echoPinRight));
 
-  Serial.println("Distancia ESQ");
-  Serial.println(obs_sensor_left);
-  Serial.println("Distancia DIR");
-  Serial.println(obs_sensor_right);
-  
-  Serial.println("Obstaculo ESQ");
-  Serial.println(_res.obs_left);
-  Serial.println("Obstaculo DIR");
-  Serial.println(_res.obs_right);
-
-  if (_res.obs_left) {
-    if (turningItr == 0) {
-      turningItr = random(1, 12);
-      Serial.println("set turningItrLeft");
-      Serial.println(turningItr);
-    }
-
-    // 2 TURNING
-    // 1 MOVING
-    directionEventLeft = 2;
-  }
-
-  if (_res.obs_right) {
-    if (turningItr == 0) {
-      turningItr = random(1, 12);
-      Serial.println("set turningItrRight");
-      Serial.println(turningItr);
-    }
-
-    // 2 TURNING
-    // 1 MOVING
-    directionEventRight = 2;
-  }
+  randomWalk();
 
   Model__controller_step(obs_sensor_left, obs_sensor_right, directionEventLeft, directionEventRight, &_res, &mem);
-
-  Serial.println("Motor ESQ");
-  Serial.println(_res.motor_mode_left);
-  Serial.println(_res.motor_speed_left);
-
-  Serial.println("Motor DIR");
-  Serial.println(_res.motor_mode_right);
-  Serial.println(_res.motor_speed_right);
 
   motor1.run(_res.motor_mode_left);
   motor1.setSpeed(_res.motor_speed_left);
@@ -90,52 +49,52 @@ void loop() {
   motor4.run(_res.motor_mode_right);
   motor4.setSpeed(_res.motor_speed_right);
 
-  Serial.println("\n");
-
-  if (turningItr >= 1) {
-    turningItr--;
-    Serial.println("-- turningItr");
-    Serial.println(turningItr);
-  }
-  else {
-    directionEventLeft = 1;
-    directionEventRight = 1;
-  }
-
-  Serial.println("directionEventLeft");
-  Serial.println(directionEventLeft);
-
-  Serial.println("directionEventRight");
-  Serial.println(directionEventRight);
-  delay(10);
+  delay(100);
 }
 
-int getDistanceLeft(){ 
-  digitalWrite(trigPinLeft, LOW);
-  delayMicroseconds(2); 
+void randomWalk() {
+  if (randomWalkItr == 1) {
+    if (directionEventLeft == 2 || directionEventRight == 2) {
+      directionEventLeft = 1;
+      directionEventRight = 1;
+    } else { 
+      directionEventLeft = random(1, 3);
+      directionEventRight = random(1, 3); 
+    }
 
-  digitalWrite(trigPinLeft, HIGH);
-  delayMicroseconds(10);
+    if (directionEventLeft == 1 && directionEventRight == 1) {
+      randomWalkItr = random(6, 11);
+    } else if (directionEventLeft == 2 && directionEventRight == 2) {
+       randomWalk();
+    } else { 
+      randomWalkItr = random(2, 4);
+    }
 
-  digitalWrite(trigPinLeft, LOW);
-  uint32_t duration = pulseIn(echoPinLeft, HIGH);
-
-  int HR_dist = duration * 0.01715;
-
-  return HR_dist;
+  } else {
+    randomWalkItr--;
+    Serial.println(randomWalkItr);
+  }
 }
 
-int getDistanceRight(){ 
-  digitalWrite(trigPinRight, LOW);
-  delayMicroseconds(2); 
+int sensorLimit(int distance) {
+  if (distance >= 500) {
+    return 0;
+  }
 
-  digitalWrite(trigPinRight, HIGH);
+  return distance;
+}
+
+int getDistance(int trigPin, int echoPin){ 
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(5); 
+
+  digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
 
-  digitalWrite(trigPinRight, LOW);
-  uint32_t duration = pulseIn(echoPinRight, HIGH);
+  digitalWrite(trigPin, LOW);
+  uint32_t duration = pulseIn(echoPin, HIGH);
 
-  int HR_dist = duration * 0.01715;
+  int HR_dist = (duration / 2) / 29.1;
 
   return HR_dist;
 }
