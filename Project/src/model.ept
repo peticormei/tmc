@@ -3,6 +3,7 @@
     unless => transiciona para outro estado e executa o novo estado
 *)
 
+
 node obstacle(dist: int) returns (obs: bool)
 let 
 	automaton
@@ -15,35 +16,59 @@ let
 	end
 tel
 
-node motor(event_dir: int; cntrl_turn: bool) returns (mode, velocity: int)
+
+node movement(obs_left, obs_right: bool) returns (direction: int)
 let
 	automaton
-		state FORWARD do
-			mode = 1;
-			velocity = 255;
-			unless ((event_dir=2) or (not cntrl_turn)) then BACKWARD
-		state BACKWARD do
-			mode = 2;
-			velocity = 255;
-			unless ((event_dir=1) & cntrl_turn) then FORWARD
+		state AHEAD do
+			direction = 1;
+			unless (obs_left & obs_right) then REVERSE
+				| (obs_left & (not obs_right)) then TURN_RIGHT
+				| ((not obs_left) & obs_right) then TURN_LEFT
+		state TURN_LEFT do
+			direction = 2;
+			unless (obs_left & obs_right) then REVERSE
+				| (obs_left & (not obs_right)) then TURN_RIGHT
+				| ((not obs_left) & (not obs_right)) then AHEAD
+		state TURN_RIGHT do
+			direction = 3;
+			unless (obs_left & obs_right) then REVERSE
+				| ((not obs_left) & obs_right) then TURN_LEFT
+				| ((not obs_left) & (not obs_right)) then AHEAD
+		state REVERSE do
+			direction = 4;
+			unless ((not obs_left) & (not obs_right)) then AHEAD
+				| ((not obs_left) & obs_right) then TURN_LEFT
+				| (obs_left & (not obs_right)) then TURN_RIGHT
 	end
 tel
 
-node controller(distance_left, distance_right, event_dir_left, event_dir_right: int) returns (obs_left, obs_right: bool; motor_mode_left, motor_mode_right, motor_speed_left, motor_speed_right: int)
+node dc(direction_layer_1, direction_layer_2: int) returns (equals: bool)
+let
+	automaton
+		state EQUALS do
+			equals = true;
+			unless ((direction_layer_1 < direction_layer_2) or (direction_layer_1 > direction_layer_2)) then NOT_EQUALS
+		state NOT_EQUALS do
+			equals = false;
+			unless not ((direction_layer_1 < direction_layer_2) & (direction_layer_2 > direction_layer_1)) then EQUALS
+	end
+tel
+
+
+node controller(distance_left, distance_right, direction_layer_2: int) returns (obs_left, obs_right, equals_direction: bool; direction_layer_1: int)
 contract
 	var
-		rule1, rule2, rule3: bool;
+		rule1: bool;
 	let
-		rule1 = not (obs_left & not (motor_mode_right=2)) or motor_mode_right=2;
-		rule2 = not (obs_right & not (motor_mode_left=2)) or motor_mode_left=2;
-		rule3 = not (obs_right & obs_left) or (motor_mode_left=2 & motor_mode_right=2); 
+		rule1 = true;
 	tel
-		enforce (rule1) & (rule2) & (rule3)
-		with (cntrl_turn_l, cntrl_turn_r: bool)
+		enforce (rule1)
+		with (cntrl_dir_left, cntrl_dir_right, cntrl_back: bool)
 	let
 		obs_left = inlined obstacle(distance_left);
-		(motor_mode_left, motor_speed_left) = inlined motor(event_dir_left, cntrl_turn_r);
-
 		obs_right = inlined obstacle(distance_right);
-		(motor_mode_right, motor_speed_right) = inlined motor(event_dir_right, cntrl_turn_l);
+
+		direction_layer_1 = inlined movement(obs_left, obs_right);
+		equals_direction = inlined dc(direction_layer_1, direction_layer_2);
 	tel

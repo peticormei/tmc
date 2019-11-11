@@ -21,6 +21,7 @@ AF_DCMotor motor4(4);
 
 void setup() {
   Serial.begin (9600);
+  Serial.println("Setup..");
 
   pinMode(trigPinLeft, OUTPUT);
   pinMode(trigPinRight, OUTPUT);
@@ -72,7 +73,6 @@ void randomWalk() {
 
   } else {
     randomWalkItr--;
-    Serial.println(randomWalkItr);
   }
 }
 
