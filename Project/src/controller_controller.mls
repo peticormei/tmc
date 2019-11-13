@@ -1,0 +1,370 @@
+node controller_controller_controller_cntrl_dir_reverse(controller_v_52 : bool;
+                                                         controller_v_53 : bool;
+                                                         controller_v_54 : bool;
+                                                         controller_v_55 : bool;
+                                                         controller_v_72 : bool;
+                                                         controller_v_76 : bool;
+                                                         controller_ck_1 : bool;
+                                                         controller_pnr_2 : bool;
+                                                         controller_ck_5_1 : bool;
+                                                         controller_pnr_1 : bool;
+                                                         controller_v_108 : bool;
+                                                         controller_v_107 : bool;
+                                                         controller_pnr : bool;
+                                                         p_controller_cntrl_dir_reverse : bool;
+                                                         p_controller_cntrl_dir_right : bool;
+                                                         p_controller_cntrl_dir_left : bool;
+                                                         p_controller_cntrl_dir_layer : bool;
+                                                         controller_cntrl_dir_right : bool;
+                                                         controller_cntrl_dir_left : bool;
+                                                         controller_cntrl_dir_layer : bool)
+returns (controller_cntrl_dir_reverse : bool)
+var v_36 : bool; v_35 : bool; v_34 : bool; v_33 : bool; v_32 : bool;
+    v_31 : bool; v_30 : bool; v_29 : bool; v_28 : bool; v_27 : bool;
+    v_26 : bool; v_25 : bool; v_24 : bool; v_23 : bool; v_22 : bool;
+    v_21 : bool; v_20 : bool; v_19 : bool; v_18 : bool; v_17 : bool;
+    v_16 : bool; v_15 : bool; v_14 : bool; v_13 : bool; v_12 : bool;
+    v_11 : bool; v_10 : bool; v_9 : bool; v_8 : bool; v_7 : bool; v_6 : bool;
+    v_5 : bool; v_4 : bool; v_3 : bool; v_2 : bool; v_1 : bool; v : bool;
+    sub_0 : bool; sub_1 : bool; sub_2 : bool; sub_3 : bool; sub_4 : bool;
+    sub_5 : bool; sub_6 : bool; sub_7 : bool; sub_8 : bool; sub_9 : bool;
+    sub_10 : bool; sub_11 : bool; sub_12 : bool; sub_13 : bool;
+    sub_14 : bool; sub_15 : bool; sub_16 : bool; sub_17 : bool;
+    sub_18 : bool; sub_19 : bool; sub_20 : bool; sub_21 : bool;
+    sub_22 : bool; sub_23 : bool; sub_24 : bool; sub_25 : bool;
+    sub_26 : bool; sub_27 : bool; sub_28 : bool; sub_29 : bool;
+    sub_30 : bool; sub_31 : bool; sub_32 : bool; sub_33 : bool;
+    sub_34 : bool; sub_35 : bool; sub_36 : bool;
+let
+  controller_cntrl_dir_reverse = sub_0;
+  sub_36 = if controller_cntrl_dir_right then sub_15 else false;
+  v = if controller_v_107 then sub_24 else sub_36;
+  sub_35 = if controller_v_108 then v else sub_21;
+  v_1 = if controller_ck_5_1 then sub_27 else sub_35;
+  v_2 = if controller_v_55 then v_1 else sub_27;
+  v_3 = if controller_ck_5_1 then sub_35 else sub_27;
+  v_4 = if controller_v_55 then sub_35 else v_3;
+  sub_34 = if controller_v_54 then v_2 else v_4;
+  v_5 = if controller_cntrl_dir_left then sub_16 else false;
+  sub_33 = if controller_cntrl_dir_right then false else v_5;
+  sub_32 = if controller_v_107 then sub_12 else sub_33;
+  sub_31 = if controller_v_108 then sub_13 else sub_32;
+  sub_30 = sub_26;
+  v_6 = if controller_ck_5_1 then sub_31 else sub_30;
+  v_7 = if controller_v_55 then v_6 else sub_31;
+  v_8 = if controller_ck_5_1 then sub_30 else sub_31;
+  v_9 = if controller_v_55 then sub_30 else v_8;
+  sub_29 = if controller_v_54 then v_7 else v_9;
+  sub_28 = if controller_cntrl_dir_right then false else sub_23;
+  v_10 = if controller_v_107 then sub_3 else sub_28;
+  sub_27 = if controller_v_108 then v_10 else sub_28;
+  sub_26 = sub_16;
+  v_11 = if controller_cntrl_dir_layer then sub_18 else false;
+  sub_25 = if controller_v_72 then v_11 else false;
+  sub_24 = if controller_cntrl_dir_right then sub_25 else sub_26;
+  sub_23 = if controller_cntrl_dir_left then false else sub_5;
+  sub_22 = if controller_cntrl_dir_right then sub_23 else false;
+  sub_21 = if controller_v_107 then sub_22 else sub_14;
+  v_12 = if controller_v_107 then sub_24 else sub_22;
+  sub_20 = if controller_v_108 then v_12 else sub_21;
+  v_13 = if controller_ck_5_1 then sub_27 else sub_20;
+  v_14 = if controller_v_55 then v_13 else sub_27;
+  v_15 = if controller_ck_5_1 then sub_20 else sub_27;
+  v_16 = if controller_v_55 then sub_20 else v_15;
+  sub_19 = if controller_v_54 then v_14 else v_16;
+  sub_18 = true;
+  sub_17 = sub_18;
+  sub_16 = sub_17;
+  sub_15 = if controller_cntrl_dir_left then false else sub_16;
+  sub_14 = if controller_cntrl_dir_right then false else sub_15;
+  v_17 = (controller_v_76 or false);
+  v_18 = if controller_cntrl_dir_layer then v_17 else false;
+  v_19 = if controller_v_72 then false else v_18;
+  v_20 = if controller_cntrl_dir_layer then false else sub_18;
+  v_21 = if controller_v_72 then v_20 else sub_17;
+  v_22 = if controller_cntrl_dir_left then v_19 else v_21;
+  v_23 = if controller_cntrl_dir_right then v_22 else false;
+  sub_13 = if controller_v_107 then v_23 else sub_14;
+  sub_12 = sub_11;
+  sub_11 = if controller_cntrl_dir_left then sub_5 else false;
+  sub_10 = if controller_cntrl_dir_right then false else sub_11;
+  sub_9 = if controller_v_107 then sub_12 else sub_10;
+  sub_8 = if controller_v_108 then sub_13 else sub_9;
+  sub_7 = false;
+  sub_6 = sub_7;
+  sub_5 = sub_6;
+  sub_4 = sub_5;
+  sub_3 = sub_4;
+  v_24 = if controller_ck_5_1 then sub_8 else sub_3;
+  v_25 = if controller_v_55 then v_24 else sub_8;
+  v_26 = if controller_ck_5_1 then sub_3 else sub_8;
+  v_27 = if controller_v_55 then sub_3 else v_26;
+  sub_2 = if controller_v_54 then v_25 else v_27;
+  v_28 = if controller_ck_1 then sub_19 else sub_2;
+  v_29 = if controller_v_53 then v_28 else sub_19;
+  v_30 = if controller_ck_1 then sub_2 else sub_19;
+  v_31 = if controller_v_53 then sub_2 else v_30;
+  sub_1 = if controller_v_52 then v_29 else v_31;
+  v_32 = if controller_ck_1 then sub_34 else sub_29;
+  v_33 = if controller_v_53 then v_32 else sub_34;
+  v_34 = if controller_ck_1 then sub_29 else sub_34;
+  v_35 = if controller_v_53 then sub_29 else v_34;
+  v_36 = if controller_v_52 then v_33 else v_35;
+  sub_0 = if p_controller_cntrl_dir_reverse then v_36 else sub_1
+tel
+
+node controller_controller_controller_cntrl_dir_right(controller_v_52 : bool;
+                                                       controller_v_53 : bool;
+                                                       controller_v_54 : bool;
+                                                       controller_v_55 : bool;
+                                                       controller_v_72 : bool;
+                                                       controller_v_76 : bool;
+                                                       controller_ck_1 : bool;
+                                                       controller_pnr_2 : bool;
+                                                       controller_ck_5_1 : bool;
+                                                       controller_pnr_1 : bool;
+                                                       controller_v_108 : bool;
+                                                       controller_v_107 : bool;
+                                                       controller_pnr : bool;
+                                                       p_controller_cntrl_dir_reverse : bool;
+                                                       p_controller_cntrl_dir_right : bool;
+                                                       p_controller_cntrl_dir_left : bool;
+                                                       p_controller_cntrl_dir_layer : bool;
+                                                       controller_cntrl_dir_left : bool;
+                                                       controller_cntrl_dir_layer : bool)
+returns (controller_cntrl_dir_right : bool)
+var v_72 : bool; v_71 : bool; v_70 : bool; v_69 : bool; v_68 : bool;
+    v_67 : bool; v_66 : bool; v_65 : bool; v_64 : bool; v_63 : bool;
+    v_62 : bool; v_61 : bool; v_60 : bool; v_59 : bool; v_58 : bool;
+    v_57 : bool; v_56 : bool; v_55 : bool; v_54 : bool; v_53 : bool;
+    v_52 : bool; v_51 : bool; v_50 : bool; v_49 : bool; v_48 : bool;
+    v_47 : bool; v_46 : bool; v_45 : bool; v_44 : bool; v_43 : bool;
+    v_42 : bool; v_41 : bool; v_40 : bool; v_39 : bool; v_38 : bool;
+    v_37 : bool; v : bool; sub_0 : bool; sub_1 : bool; sub_2 : bool;
+    sub_3 : bool; sub_4 : bool; sub_5 : bool; sub_6 : bool; sub_7 : bool;
+    sub_8 : bool; sub_9 : bool; sub_10 : bool; sub_11 : bool; sub_12 : bool;
+    sub_13 : bool; sub_14 : bool; sub_15 : bool; sub_16 : bool;
+    sub_17 : bool; sub_18 : bool; sub_19 : bool; sub_20 : bool;
+    sub_21 : bool; sub_22 : bool; sub_23 : bool; sub_24 : bool;
+    sub_25 : bool; sub_26 : bool;
+let
+  controller_cntrl_dir_right = sub_0;
+  v = if controller_v_107 then sub_20 else sub_10;
+  sub_26 = if controller_v_108 then v else sub_10;
+  v_37 = if controller_cntrl_dir_layer then sub_11 else sub_6;
+  sub_25 = if controller_v_72 then v_37 else sub_5;
+  v_38 = if controller_v_107 then sub_25 else sub_16;
+  sub_24 = if controller_v_108 then v_38 else sub_15;
+  v_39 = if controller_ck_5_1 then sub_26 else sub_24;
+  v_40 = if controller_v_55 then v_39 else sub_26;
+  v_41 = if controller_ck_5_1 then sub_24 else sub_26;
+  v_42 = if controller_v_55 then sub_24 else v_41;
+  sub_23 = if controller_v_54 then v_40 else v_42;
+  v_43 = if controller_cntrl_dir_left then sub_17 else false;
+  sub_22 = if controller_v_107 then v_43 else sub_8;
+  sub_21 = if controller_v_108 then sub_9 else sub_22;
+  sub_20 = sub_17;
+  v_44 = if controller_ck_5_1 then sub_21 else sub_20;
+  v_45 = if controller_v_55 then v_44 else sub_21;
+  v_46 = if controller_ck_5_1 then sub_20 else sub_21;
+  v_47 = if controller_v_55 then sub_20 else v_46;
+  sub_19 = if controller_v_54 then v_45 else v_47;
+  v_48 = if controller_v_107 then sub_3 else sub_10;
+  sub_18 = if controller_v_108 then v_48 else sub_10;
+  sub_17 = sub_12;
+  sub_16 = if controller_cntrl_dir_left then false else sub_17;
+  sub_15 = if controller_v_107 then sub_16 else sub_10;
+  v_49 = if controller_v_107 then sub_3 else sub_16;
+  sub_14 = if controller_v_108 then v_49 else sub_15;
+  v_50 = if controller_ck_5_1 then sub_18 else sub_14;
+  v_51 = if controller_v_55 then v_50 else sub_18;
+  v_52 = if controller_ck_5_1 then sub_14 else sub_18;
+  v_53 = if controller_v_55 then sub_14 else v_52;
+  sub_13 = if controller_v_54 then v_51 else v_53;
+  sub_12 = sub_11;
+  sub_11 = true;
+  sub_10 = if controller_cntrl_dir_left then false else sub_4;
+  v_54 = (controller_v_76 or false);
+  v_55 = if controller_cntrl_dir_layer then v_54 else false;
+  v_56 = if controller_v_72 then false else v_55;
+  v_57 = if controller_cntrl_dir_layer then false else sub_11;
+  v_58 = if controller_v_72 then v_57 else sub_12;
+  v_59 = if controller_cntrl_dir_left then v_56 else v_58;
+  sub_9 = if controller_v_107 then v_59 else sub_10;
+  sub_8 = if controller_cntrl_dir_left then sub_4 else false;
+  sub_7 = if controller_v_108 then sub_9 else sub_8;
+  sub_6 = false;
+  sub_5 = sub_6;
+  sub_4 = sub_5;
+  sub_3 = sub_4;
+  v_60 = if controller_ck_5_1 then sub_7 else sub_3;
+  v_61 = if controller_v_55 then v_60 else sub_7;
+  v_62 = if controller_ck_5_1 then sub_3 else sub_7;
+  v_63 = if controller_v_55 then sub_3 else v_62;
+  sub_2 = if controller_v_54 then v_61 else v_63;
+  v_64 = if controller_ck_1 then sub_13 else sub_2;
+  v_65 = if controller_v_53 then v_64 else sub_13;
+  v_66 = if controller_ck_1 then sub_2 else sub_13;
+  v_67 = if controller_v_53 then sub_2 else v_66;
+  sub_1 = if controller_v_52 then v_65 else v_67;
+  v_68 = if controller_ck_1 then sub_23 else sub_19;
+  v_69 = if controller_v_53 then v_68 else sub_23;
+  v_70 = if controller_ck_1 then sub_19 else sub_23;
+  v_71 = if controller_v_53 then sub_19 else v_70;
+  v_72 = if controller_v_52 then v_69 else v_71;
+  sub_0 = if p_controller_cntrl_dir_right then v_72 else sub_1
+tel
+
+node controller_controller_controller_cntrl_dir_left(controller_v_52 : bool;
+                                                      controller_v_53 : bool;
+                                                      controller_v_54 : bool;
+                                                      controller_v_55 : bool;
+                                                      controller_v_72 : bool;
+                                                      controller_v_76 : bool;
+                                                      controller_ck_1 : bool;
+                                                      controller_pnr_2 : bool;
+                                                      controller_ck_5_1 : bool;
+                                                      controller_pnr_1 : bool;
+                                                      controller_v_108 : bool;
+                                                      controller_v_107 : bool;
+                                                      controller_pnr : bool;
+                                                      p_controller_cntrl_dir_reverse : bool;
+                                                      p_controller_cntrl_dir_right : bool;
+                                                      p_controller_cntrl_dir_left : bool;
+                                                      p_controller_cntrl_dir_layer : bool;
+                                                      controller_cntrl_dir_layer : bool)
+returns (controller_cntrl_dir_left : bool)
+var v_84 : bool; v_83 : bool; v_82 : bool; v_81 : bool; v_80 : bool;
+    v_79 : bool; v_78 : bool; v_77 : bool; v_76 : bool; v_75 : bool;
+    v_74 : bool; v_73 : bool; v : bool; sub_0 : bool; sub_1 : bool;
+    sub_2 : bool; sub_3 : bool; sub_4 : bool; sub_5 : bool; sub_6 : bool;
+    sub_7 : bool; sub_8 : bool; sub_9 : bool; sub_10 : bool; sub_11 : bool;
+    sub_12 : bool; sub_13 : bool; sub_14 : bool;
+let
+  controller_cntrl_dir_left = sub_0;
+  v = if controller_v_107 then sub_2 else sub_3;
+  sub_14 = if controller_v_108 then v else sub_3;
+  sub_13 = sub_14;
+  sub_12 = sub_13;
+  sub_11 = if controller_cntrl_dir_layer then false else sub_5;
+  sub_10 = if controller_v_72 then sub_11 else sub_4;
+  v_73 = if controller_cntrl_dir_layer then controller_v_76 else sub_5;
+  v_74 = if controller_v_72 then sub_11 else v_73;
+  v_75 = if p_controller_cntrl_dir_left then v_74 else sub_10;
+  v_76 = if controller_v_107 then v_75 else sub_3;
+  sub_9 = if controller_v_108 then v_76 else sub_6;
+  sub_8 = true;
+  sub_7 = sub_8;
+  sub_6 = sub_7;
+  sub_5 = false;
+  sub_4 = sub_5;
+  sub_3 = sub_4;
+  sub_2 = if p_controller_cntrl_dir_left then sub_6 else sub_3;
+  v_77 = if controller_ck_5_1 then sub_9 else sub_2;
+  v_78 = if controller_v_55 then v_77 else sub_9;
+  v_79 = if controller_ck_5_1 then sub_2 else sub_9;
+  v_80 = if controller_v_55 then sub_2 else v_79;
+  sub_1 = if controller_v_54 then v_78 else v_80;
+  v_81 = if controller_ck_1 then sub_12 else sub_1;
+  v_82 = if controller_v_53 then v_81 else sub_12;
+  v_83 = if controller_ck_1 then sub_1 else sub_12;
+  v_84 = if controller_v_53 then sub_1 else v_83;
+  sub_0 = if controller_v_52 then v_82 else v_84
+tel
+
+node controller_controller_controller_cntrl_dir_layer(controller_v_52 : bool;
+                                                       controller_v_53 : bool;
+                                                       controller_v_54 : bool;
+                                                       controller_v_55 : bool;
+                                                       controller_v_72 : bool;
+                                                       controller_v_76 : bool;
+                                                       controller_ck_1 : bool;
+                                                       controller_pnr_2 : bool;
+                                                       controller_ck_5_1 : bool;
+                                                       controller_pnr_1 : bool;
+                                                       controller_v_108 : bool;
+                                                       controller_v_107 : bool;
+                                                       controller_pnr : bool;
+                                                       p_controller_cntrl_dir_reverse : bool;
+                                                       p_controller_cntrl_dir_right : bool;
+                                                       p_controller_cntrl_dir_left : bool;
+                                                       p_controller_cntrl_dir_layer : bool)
+returns (controller_cntrl_dir_layer : bool)
+var v_93 : bool; v_92 : bool; v_91 : bool; v_90 : bool; v_89 : bool;
+    v_88 : bool; v_87 : bool; v_86 : bool; v_85 : bool; v : bool;
+    sub_0 : bool; sub_1 : bool; sub_2 : bool; sub_3 : bool; sub_4 : bool;
+    sub_5 : bool; sub_6 : bool; sub_7 : bool;
+let
+  controller_cntrl_dir_layer = sub_0;
+  sub_7 = sub_2;
+  sub_6 = sub_7;
+  v = if controller_v_72 then false else sub_3;
+  v_85 = if controller_v_107 then v else sub_2;
+  sub_5 = if controller_v_108 then v_85 else sub_2;
+  sub_4 = p_controller_cntrl_dir_layer;
+  sub_3 = sub_4;
+  sub_2 = sub_3;
+  v_86 = if controller_ck_5_1 then sub_5 else sub_2;
+  v_87 = if controller_v_55 then v_86 else sub_5;
+  v_88 = if controller_ck_5_1 then sub_2 else sub_5;
+  v_89 = if controller_v_55 then sub_2 else v_88;
+  sub_1 = if controller_v_54 then v_87 else v_89;
+  v_90 = if controller_ck_1 then sub_6 else sub_1;
+  v_91 = if controller_v_53 then v_90 else sub_6;
+  v_92 = if controller_ck_1 then sub_1 else sub_6;
+  v_93 = if controller_v_53 then sub_1 else v_92;
+  sub_0 = if controller_v_52 then v_91 else v_93
+tel
+
+node controller_controller(controller_v_52 : bool; controller_v_53 : bool;
+                            controller_v_54 : bool; controller_v_55 : bool;
+                            controller_v_72 : bool; controller_v_76 : bool;
+                            controller_ck_1 : bool; controller_pnr_2 : bool;
+                            controller_ck_5_1 : bool;
+                            controller_pnr_1 : bool; controller_v_108 : bool;
+                            controller_v_107 : bool; controller_pnr : bool;
+                            p_controller_cntrl_dir_reverse : bool;
+                            p_controller_cntrl_dir_right : bool;
+                            p_controller_cntrl_dir_left : bool;
+                            p_controller_cntrl_dir_layer : bool)
+returns (controller_cntrl_dir_reverse : bool;
+          controller_cntrl_dir_right : bool;
+          controller_cntrl_dir_left : bool;
+          controller_cntrl_dir_layer : bool)
+let
+  controller_cntrl_dir_layer =
+    controller_controller_controller_cntrl_dir_layer
+    (controller_v_52, controller_v_53, controller_v_54, controller_v_55,
+      controller_v_72, controller_v_76, controller_ck_1, controller_pnr_2,
+      controller_ck_5_1, controller_pnr_1, controller_v_108,
+      controller_v_107, controller_pnr, p_controller_cntrl_dir_reverse,
+      p_controller_cntrl_dir_right, p_controller_cntrl_dir_left,
+      p_controller_cntrl_dir_layer);
+  controller_cntrl_dir_left =
+    controller_controller_controller_cntrl_dir_left
+    (controller_v_52, controller_v_53, controller_v_54, controller_v_55,
+      controller_v_72, controller_v_76, controller_ck_1, controller_pnr_2,
+      controller_ck_5_1, controller_pnr_1, controller_v_108,
+      controller_v_107, controller_pnr, p_controller_cntrl_dir_reverse,
+      p_controller_cntrl_dir_right, p_controller_cntrl_dir_left,
+      p_controller_cntrl_dir_layer, controller_cntrl_dir_layer);
+  controller_cntrl_dir_right =
+    controller_controller_controller_cntrl_dir_right
+    (controller_v_52, controller_v_53, controller_v_54, controller_v_55,
+      controller_v_72, controller_v_76, controller_ck_1, controller_pnr_2,
+      controller_ck_5_1, controller_pnr_1, controller_v_108,
+      controller_v_107, controller_pnr, p_controller_cntrl_dir_reverse,
+      p_controller_cntrl_dir_right, p_controller_cntrl_dir_left,
+      p_controller_cntrl_dir_layer, controller_cntrl_dir_left,
+      controller_cntrl_dir_layer);
+  controller_cntrl_dir_reverse =
+    controller_controller_controller_cntrl_dir_reverse
+    (controller_v_52, controller_v_53, controller_v_54, controller_v_55,
+      controller_v_72, controller_v_76, controller_ck_1, controller_pnr_2,
+      controller_ck_5_1, controller_pnr_1, controller_v_108,
+      controller_v_107, controller_pnr, p_controller_cntrl_dir_reverse,
+      p_controller_cntrl_dir_right, p_controller_cntrl_dir_left,
+      p_controller_cntrl_dir_layer, controller_cntrl_dir_right,
+      controller_cntrl_dir_left, controller_cntrl_dir_layer)
+tel
+

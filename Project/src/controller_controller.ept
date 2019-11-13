@@ -1,0 +1,122 @@
+node controller_controller_controller_cntrl_dir_reverse(controller_v_52,controller_v_53,controller_v_54,controller_v_55,controller_v_72,controller_v_76,controller_ck_1,controller_pnr_2,controller_ck_5_1,controller_pnr_1,controller_v_108,controller_v_107,controller_pnr,p_controller_cntrl_dir_reverse,p_controller_cntrl_dir_right,p_controller_cntrl_dir_left,p_controller_cntrl_dir_layer,controller_cntrl_dir_right,controller_cntrl_dir_left,controller_cntrl_dir_layer:bool) returns (controller_cntrl_dir_reverse:bool)
+  var sub_0,sub_1,sub_2,sub_3,sub_4,sub_5,sub_6,sub_7,sub_8,sub_9,sub_10,sub_11,sub_12,sub_13,sub_14,sub_15,sub_16,sub_17,sub_18,sub_19,sub_20,sub_21,sub_22,sub_23,sub_24,sub_25,sub_26,sub_27,sub_28,sub_29,sub_30,sub_31,sub_32,sub_33,sub_34,sub_35,sub_36:bool;
+
+let
+  sub_0 = (if p_controller_cntrl_dir_reverse then (if controller_v_52 then (if controller_v_53 then (if controller_ck_1 then sub_34 else sub_29) else sub_34) else (if controller_v_53 then sub_29 else (if controller_ck_1 then sub_29 else sub_34))) else sub_1);
+  sub_1 = (if controller_v_52 then (if controller_v_53 then (if controller_ck_1 then sub_19 else sub_2) else sub_19) else (if controller_v_53 then sub_2 else (if controller_ck_1 then sub_2 else sub_19)));
+  sub_2 = (if controller_v_54 then (if controller_v_55 then (if controller_ck_5_1 then sub_8 else sub_3) else sub_8) else (if controller_v_55 then sub_3 else (if controller_ck_5_1 then sub_3 else sub_8)));
+  sub_3 = (sub_4);
+  sub_4 = (sub_5);
+  sub_5 = (sub_6);
+  sub_6 = (sub_7);
+  sub_7 = (false);
+  sub_8 = (if controller_v_108 then sub_13 else sub_9);
+  sub_9 = (if controller_v_107 then sub_12 else sub_10);
+  sub_10 = (if controller_cntrl_dir_right then false else sub_11);
+  sub_11 = (if controller_cntrl_dir_left then sub_5 else false);
+  sub_12 = (sub_11);
+  sub_13 = (if controller_v_107 then (if controller_cntrl_dir_right then (if controller_cntrl_dir_left then (if controller_v_72 then false else (if controller_cntrl_dir_layer then controller_v_76 or (false) else false)) else (if controller_v_72 then (if controller_cntrl_dir_layer then false else sub_18) else sub_17)) else false) else sub_14);
+  sub_14 = (if controller_cntrl_dir_right then false else sub_15);
+  sub_15 = (if controller_cntrl_dir_left then false else sub_16);
+  sub_16 = (sub_17);
+  sub_17 = (sub_18);
+  sub_18 = (true);
+  sub_19 = (if controller_v_54 then (if controller_v_55 then (if controller_ck_5_1 then sub_27 else sub_20) else sub_27) else (if controller_v_55 then sub_20 else (if controller_ck_5_1 then sub_20 else sub_27)));
+  sub_20 = (if controller_v_108 then (if controller_v_107 then sub_24 else sub_22) else sub_21);
+  sub_21 = (if controller_v_107 then sub_22 else sub_14);
+  sub_22 = (if controller_cntrl_dir_right then sub_23 else false);
+  sub_23 = (if controller_cntrl_dir_left then false else sub_5);
+  sub_24 = (if controller_cntrl_dir_right then (sub_25) else sub_26);
+  sub_25 = (if controller_v_72 then (if controller_cntrl_dir_layer then sub_18 else false) else false);
+  sub_26 = (sub_16);
+  sub_27 = (if controller_v_108 then (if controller_v_107 then sub_3 else sub_28) else sub_28);
+  sub_28 = (if controller_cntrl_dir_right then false else sub_23);
+  sub_29 = (if controller_v_54 then (if controller_v_55 then (if controller_ck_5_1 then sub_31 else sub_30) else sub_31) else (if controller_v_55 then sub_30 else (if controller_ck_5_1 then sub_30 else sub_31)));
+  sub_30 = (sub_26);
+  sub_31 = (if controller_v_108 then sub_13 else sub_32);
+  sub_32 = (if controller_v_107 then sub_12 else sub_33);
+  sub_33 = (if controller_cntrl_dir_right then false else (if controller_cntrl_dir_left then sub_16 else false));
+  sub_34 = (if controller_v_54 then (if controller_v_55 then (if controller_ck_5_1 then sub_27 else sub_35) else sub_27) else (if controller_v_55 then sub_35 else (if controller_ck_5_1 then sub_35 else sub_27)));
+  sub_35 = (if controller_v_108 then (if controller_v_107 then sub_24 else sub_36) else sub_21);
+  sub_36 = (if controller_cntrl_dir_right then sub_15 else false);
+  controller_cntrl_dir_reverse = sub_0;
+tel
+
+node controller_controller_controller_cntrl_dir_right(controller_v_52,controller_v_53,controller_v_54,controller_v_55,controller_v_72,controller_v_76,controller_ck_1,controller_pnr_2,controller_ck_5_1,controller_pnr_1,controller_v_108,controller_v_107,controller_pnr,p_controller_cntrl_dir_reverse,p_controller_cntrl_dir_right,p_controller_cntrl_dir_left,p_controller_cntrl_dir_layer,controller_cntrl_dir_left,controller_cntrl_dir_layer:bool) returns (controller_cntrl_dir_right:bool)
+  var sub_0,sub_1,sub_2,sub_3,sub_4,sub_5,sub_6,sub_7,sub_8,sub_9,sub_10,sub_11,sub_12,sub_13,sub_14,sub_15,sub_16,sub_17,sub_18,sub_19,sub_20,sub_21,sub_22,sub_23,sub_24,sub_25,sub_26:bool;
+
+let
+  sub_0 = (if p_controller_cntrl_dir_right then (if controller_v_52 then (if controller_v_53 then (if controller_ck_1 then sub_23 else sub_19) else sub_23) else (if controller_v_53 then sub_19 else (if controller_ck_1 then sub_19 else sub_23))) else sub_1);
+  sub_1 = (if controller_v_52 then (if controller_v_53 then (if controller_ck_1 then sub_13 else sub_2) else sub_13) else (if controller_v_53 then sub_2 else (if controller_ck_1 then sub_2 else sub_13)));
+  sub_2 = (if controller_v_54 then (if controller_v_55 then (if controller_ck_5_1 then sub_7 else sub_3) else sub_7) else (if controller_v_55 then sub_3 else (if controller_ck_5_1 then sub_3 else sub_7)));
+  sub_3 = (sub_4);
+  sub_4 = (sub_5);
+  sub_5 = (sub_6);
+  sub_6 = (false);
+  sub_7 = (if controller_v_108 then sub_9 else sub_8);
+  sub_8 = (if controller_cntrl_dir_left then sub_4 else false);
+  sub_9 = (if controller_v_107 then (if controller_cntrl_dir_left then (if controller_v_72 then false else (if controller_cntrl_dir_layer then controller_v_76 or (false) else false)) else (if controller_v_72 then (if controller_cntrl_dir_layer then false else sub_11) else sub_12)) else sub_10);
+  sub_10 = (if controller_cntrl_dir_left then false else sub_4);
+  sub_11 = (true);
+  sub_12 = (sub_11);
+  sub_13 = (if controller_v_54 then (if controller_v_55 then (if controller_ck_5_1 then sub_18 else sub_14) else sub_18) else (if controller_v_55 then sub_14 else (if controller_ck_5_1 then sub_14 else sub_18)));
+  sub_14 = (if controller_v_108 then (if controller_v_107 then sub_3 else sub_16) else sub_15);
+  sub_15 = (if controller_v_107 then sub_16 else sub_10);
+  sub_16 = (if controller_cntrl_dir_left then false else sub_17);
+  sub_17 = (sub_12);
+  sub_18 = (if controller_v_108 then (if controller_v_107 then sub_3 else sub_10) else sub_10);
+  sub_19 = (if controller_v_54 then (if controller_v_55 then (if controller_ck_5_1 then sub_21 else sub_20) else sub_21) else (if controller_v_55 then sub_20 else (if controller_ck_5_1 then sub_20 else sub_21)));
+  sub_20 = (sub_17);
+  sub_21 = (if controller_v_108 then sub_9 else sub_22);
+  sub_22 = (if controller_v_107 then (if controller_cntrl_dir_left then sub_17 else false) else sub_8);
+  sub_23 = (if controller_v_54 then (if controller_v_55 then (if controller_ck_5_1 then sub_26 else sub_24) else sub_26) else (if controller_v_55 then sub_24 else (if controller_ck_5_1 then sub_24 else sub_26)));
+  sub_24 = (if controller_v_108 then (if controller_v_107 then (sub_25) else sub_16) else sub_15);
+  sub_25 = (if controller_v_72 then (if controller_cntrl_dir_layer then sub_11 else sub_6) else sub_5);
+  sub_26 = (if controller_v_108 then (if controller_v_107 then sub_20 else sub_10) else sub_10);
+  controller_cntrl_dir_right = sub_0;
+tel
+
+node controller_controller_controller_cntrl_dir_left(controller_v_52,controller_v_53,controller_v_54,controller_v_55,controller_v_72,controller_v_76,controller_ck_1,controller_pnr_2,controller_ck_5_1,controller_pnr_1,controller_v_108,controller_v_107,controller_pnr,p_controller_cntrl_dir_reverse,p_controller_cntrl_dir_right,p_controller_cntrl_dir_left,p_controller_cntrl_dir_layer,controller_cntrl_dir_layer:bool) returns (controller_cntrl_dir_left:bool)
+  var sub_0,sub_1,sub_2,sub_3,sub_4,sub_5,sub_6,sub_7,sub_8,sub_9,sub_10,sub_11,sub_12,sub_13,sub_14:bool;
+
+let
+  sub_0 = (if controller_v_52 then (if controller_v_53 then (if controller_ck_1 then sub_12 else sub_1) else sub_12) else (if controller_v_53 then sub_1 else (if controller_ck_1 then sub_1 else sub_12)));
+  sub_1 = (if controller_v_54 then (if controller_v_55 then (if controller_ck_5_1 then sub_9 else sub_2) else sub_9) else (if controller_v_55 then sub_2 else (if controller_ck_5_1 then sub_2 else sub_9)));
+  sub_2 = (if p_controller_cntrl_dir_left then sub_6 else sub_3);
+  sub_3 = (sub_4);
+  sub_4 = (sub_5);
+  sub_5 = (false);
+  sub_6 = (sub_7);
+  sub_7 = (sub_8);
+  sub_8 = (true);
+  sub_9 = (if controller_v_108 then (if controller_v_107 then (if p_controller_cntrl_dir_left then (if controller_v_72 then sub_11 else (if controller_cntrl_dir_layer then controller_v_76 else sub_5)) else sub_10) else sub_3) else sub_6);
+  sub_10 = (if controller_v_72 then sub_11 else sub_4);
+  sub_11 = (if controller_cntrl_dir_layer then false else sub_5);
+  sub_12 = (sub_13);
+  sub_13 = (sub_14);
+  sub_14 = (if controller_v_108 then (if controller_v_107 then sub_2 else sub_3) else sub_3);
+  controller_cntrl_dir_left = sub_0;
+tel
+
+node controller_controller_controller_cntrl_dir_layer(controller_v_52,controller_v_53,controller_v_54,controller_v_55,controller_v_72,controller_v_76,controller_ck_1,controller_pnr_2,controller_ck_5_1,controller_pnr_1,controller_v_108,controller_v_107,controller_pnr,p_controller_cntrl_dir_reverse,p_controller_cntrl_dir_right,p_controller_cntrl_dir_left,p_controller_cntrl_dir_layer:bool) returns (controller_cntrl_dir_layer:bool)
+  var sub_0,sub_1,sub_2,sub_3,sub_4,sub_5,sub_6,sub_7:bool;
+
+let
+  sub_0 = (if controller_v_52 then (if controller_v_53 then (if controller_ck_1 then sub_6 else sub_1) else sub_6) else (if controller_v_53 then sub_1 else (if controller_ck_1 then sub_1 else sub_6)));
+  sub_1 = (if controller_v_54 then (if controller_v_55 then (if controller_ck_5_1 then sub_5 else sub_2) else sub_5) else (if controller_v_55 then sub_2 else (if controller_ck_5_1 then sub_2 else sub_5)));
+  sub_2 = (sub_3);
+  sub_3 = (sub_4);
+  sub_4 = p_controller_cntrl_dir_layer;
+  sub_5 = (if controller_v_108 then (if controller_v_107 then (if controller_v_72 then (false) else sub_3) else sub_2) else sub_2);
+  sub_6 = (sub_7);
+  sub_7 = (sub_2);
+  controller_cntrl_dir_layer = sub_0;
+tel
+
+node controller_controller(controller_v_52,controller_v_53,controller_v_54,controller_v_55,controller_v_72,controller_v_76,controller_ck_1,controller_pnr_2,controller_ck_5_1,controller_pnr_1,controller_v_108,controller_v_107,controller_pnr,p_controller_cntrl_dir_reverse,p_controller_cntrl_dir_right,p_controller_cntrl_dir_left,p_controller_cntrl_dir_layer:bool) returns (controller_cntrl_dir_reverse,controller_cntrl_dir_right,controller_cntrl_dir_left,controller_cntrl_dir_layer:bool)
+let
+  controller_cntrl_dir_reverse = controller_controller_controller_cntrl_dir_reverse(controller_v_52,controller_v_53,controller_v_54,controller_v_55,controller_v_72,controller_v_76,controller_ck_1,controller_pnr_2,controller_ck_5_1,controller_pnr_1,controller_v_108,controller_v_107,controller_pnr,p_controller_cntrl_dir_reverse,p_controller_cntrl_dir_right,p_controller_cntrl_dir_left,p_controller_cntrl_dir_layer,controller_cntrl_dir_right,controller_cntrl_dir_left,controller_cntrl_dir_layer);
+  controller_cntrl_dir_right = controller_controller_controller_cntrl_dir_right(controller_v_52,controller_v_53,controller_v_54,controller_v_55,controller_v_72,controller_v_76,controller_ck_1,controller_pnr_2,controller_ck_5_1,controller_pnr_1,controller_v_108,controller_v_107,controller_pnr,p_controller_cntrl_dir_reverse,p_controller_cntrl_dir_right,p_controller_cntrl_dir_left,p_controller_cntrl_dir_layer,controller_cntrl_dir_left,controller_cntrl_dir_layer);
+  controller_cntrl_dir_left = controller_controller_controller_cntrl_dir_left(controller_v_52,controller_v_53,controller_v_54,controller_v_55,controller_v_72,controller_v_76,controller_ck_1,controller_pnr_2,controller_ck_5_1,controller_pnr_1,controller_v_108,controller_v_107,controller_pnr,p_controller_cntrl_dir_reverse,p_controller_cntrl_dir_right,p_controller_cntrl_dir_left,p_controller_cntrl_dir_layer,controller_cntrl_dir_layer);
+  controller_cntrl_dir_layer = controller_controller_controller_cntrl_dir_layer(controller_v_52,controller_v_53,controller_v_54,controller_v_55,controller_v_72,controller_v_76,controller_ck_1,controller_pnr_2,controller_ck_5_1,controller_pnr_1,controller_v_108,controller_v_107,controller_pnr,p_controller_cntrl_dir_reverse,p_controller_cntrl_dir_right,p_controller_cntrl_dir_left,p_controller_cntrl_dir_layer);
+tel
