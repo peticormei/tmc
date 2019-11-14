@@ -27,13 +27,13 @@ let
 				| ((not cntrl_dir_left) or ((direction_layer_2=2) & cntrl_dir_layer)) then TURN_LEFT
 		state TURN_LEFT do
 			direction = 2;
-			unless (cntrl_dir_left) then AHEAD
-				| (cntrl_dir_right) then TURN_RIGHT
+			unless ((not cntrl_dir_right) or ((direction_layer_2=3) & cntrl_dir_layer)) then TURN_RIGHT
+				| (((not cntrl_dir_left) or (not (direction_layer_2=2))) & cntrl_dir_layer) then AHEAD
 				| (not cntrl_dir_reverse) then REVERSE
 		state TURN_RIGHT do
 			direction = 3;
-			unless (cntrl_dir_right) then AHEAD 
-				| (cntrl_dir_left) then TURN_LEFT
+			unless ((not cntrl_dir_left) or ((direction_layer_2=2) & cntrl_dir_layer)) then TURN_LEFT
+				| (((not cntrl_dir_left) or (not (direction_layer_2=3))) & cntrl_dir_layer) then AHEAD
 				| (not cntrl_dir_reverse) then REVERSE
 		state REVERSE do
 			direction = 4;
@@ -43,19 +43,6 @@ let
 	end
 tel
 
-node dc(direction_layer_1, direction_layer_2: int) returns (equals: bool)
-let
-	automaton
-		state EQUALS do
-			equals = true;
-			unless ((direction_layer_1 < direction_layer_2) or (direction_layer_1 > direction_layer_2)) then NOT_EQUALS
-		state NOT_EQUALS do
-			equals = false;
-			unless not ((direction_layer_1 < direction_layer_2) & (direction_layer_2 > direction_layer_1)) then EQUALS
-	end
-tel
-
-
 node controller(distance_left, distance_right, direction_layer_2: int) returns (obs_left, obs_right: bool; direction_layer_1: int)
 contract
 	var
@@ -64,10 +51,10 @@ contract
 		rule1 = not (obs_left & obs_right) or (direction_layer_1=4);
 		rule2 = not (obs_left & (not obs_right)) or (direction_layer_1=3);
 		rule3 = not ((not obs_left) & obs_right) or (direction_layer_1=2);
-		rule4 = not ((not obs_left) & (not obs_right)) or (direction_layer_1>=1);
+		rule4 = not ((not obs_left) & (not obs_right)) or ((direction_layer_1>=1) & (direction_layer_1<4));
 	tel
-		enforce (rule1) & (rule2) & (rule3) & (rule4)
-		with (cntrl_dir_layer, cntrl_dir_left, cntrl_dir_right, cntrl_dir_reverse: bool)
+		enforce (rule4) & (rule1) & (rule2) & (rule3)
+		with (cntrl_dir_layer, cntrl_dir_reverse, cntrl_dir_left, cntrl_dir_right: bool)
 	let
 		obs_left = inlined obstacle(distance_left);
 		obs_right = inlined obstacle(distance_right);
