@@ -43,21 +43,43 @@ let
 	end
 tel
 
-node controller(distance_left, distance_right, direction_layer_2: int) returns (obs_left, obs_right: bool; direction_layer_1: int)
+node motor(cntrl_motor: bool) returns (velocity, mode: int)
+let 
+	automaton
+        	state FORWARD do
+            		velocity = 255;
+            		mode = 1;
+            		unless not cntrl_motor then BACKWARD
+        	state BACKWARD do
+            		velocity = 255;
+            		mode = 2;
+            		unless cntrl_motor then FORWARD
+    	end
+tel
+
+node controller(distance_left, distance_right, direction_layer_2: int) returns (obs_left, obs_right: bool; direction_layer_1, motor_speed_left, motor_mode_left, motor_speed_right, motor_mode_right: int)
 contract
 	var
-		rule1, rule2, rule3, rule4: bool;
+		rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8: bool;
 	let
 		rule1 = not (obs_left & obs_right) or (direction_layer_1=4);
 		rule2 = not (obs_left & (not obs_right)) or (direction_layer_1=3);
 		rule3 = not ((not obs_left) & obs_right) or (direction_layer_1=2);
 		rule4 = not ((not obs_left) & (not obs_right)) or ((direction_layer_1>=1) & (direction_layer_1<4));
+
+		rule5 = not (direction_layer_1=1) or ((motor_mode_left=1) & (motor_mode_right=1));
+		rule6 = not (direction_layer_1=2) or ((motor_mode_left=2) & (motor_mode_right=1));
+		rule7 = not (direction_layer_1=3) or ((motor_mode_left=1) & (motor_mode_right=2));
+		rule8 = not (direction_layer_1=4) or ((motor_mode_left=2) & (motor_mode_right=2));
 	tel
-		enforce (rule4) & (rule1) & (rule2) & (rule3)
-		with (cntrl_dir_layer, cntrl_dir_reverse, cntrl_dir_left, cntrl_dir_right: bool)
+		enforce (rule4) & (rule1) & (rule2) & (rule3) & (rule5) & (rule6) & (rule7) & (rule8)
+		with (cntrl_dir_layer, cntrl_dir_reverse, cntrl_dir_left, cntrl_dir_right, cntrl_motor_left, cntrl_motor_right: bool)
 	let
 		obs_left = inlined obstacle(distance_left);
 		obs_right = inlined obstacle(distance_right);
 
 		direction_layer_1 = inlined movement(cntrl_dir_left, cntrl_dir_right, cntrl_dir_reverse, cntrl_dir_layer, direction_layer_2);
+
+		(motor_speed_left, motor_mode_left) = inlined motor(cntrl_motor_left);
+		(motor_speed_right, motor_mode_right) = inlined motor(cntrl_motor_right);
 	tel
