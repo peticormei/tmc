@@ -17,29 +17,38 @@ let
 tel
 
 
-node movement(cntrl_dir_left, cntrl_dir_right, cntrl_dir_reverse, cntrl_dir_layer: bool; direction_layer_2: int) returns (direction: int)
+node movement(cntrl_dir_left, cntrl_dir_right, cntrl_dir_reverse, cntrl_dir_layer: bool; direction_layer_2: int) returns (direction, count: int; reversing: bool)
+	var last iterate:int = 0;
 let
+	count = iterate;
 	automaton
 		state AHEAD do
+			iterate = 0;
+			reversing = false;
 			direction = 1;
 			unless (not cntrl_dir_reverse) then REVERSE
 				| ((not cntrl_dir_right) or ((direction_layer_2=3) & cntrl_dir_layer)) then TURN_RIGHT
 				| ((not cntrl_dir_left) or ((direction_layer_2=2) & cntrl_dir_layer)) then TURN_LEFT
 		state TURN_LEFT do
+			iterate = 0;
+			reversing = false;
 			direction = 2;
 			unless ((not cntrl_dir_right) or ((direction_layer_2=3) & cntrl_dir_layer)) then TURN_RIGHT
 				| (((not cntrl_dir_left) or (not (direction_layer_2=2))) & cntrl_dir_layer) then AHEAD
 				| (not cntrl_dir_reverse) then REVERSE
 		state TURN_RIGHT do
+			iterate = 0;
+			reversing = false;
 			direction = 3;
 			unless ((not cntrl_dir_left) or ((direction_layer_2=2) & cntrl_dir_layer)) then TURN_LEFT
 				| (((not cntrl_dir_left) or (not (direction_layer_2=3))) & cntrl_dir_layer) then AHEAD
 				| (not cntrl_dir_reverse) then REVERSE
 		state REVERSE do
+			iterate = last iterate + 1;
+			reversing = true;
 			direction = 4;
-			unless (cntrl_dir_reverse) then AHEAD
-				| (cntrl_dir_left) then TURN_LEFT
-				| (cntrl_dir_right) then TURN_RIGHT
+			unless (cntrl_dir_left) & ((last iterate)=6) then TURN_LEFT
+				| (cntrl_dir_right) & ((last iterate)=6) then TURN_RIGHT
 	end
 tel
 
@@ -57,15 +66,15 @@ let
     	end
 tel
 
-node controller(distance_left, distance_right, direction_layer_2: int) returns (obs_left, obs_right: bool; direction_layer_1, motor_speed_left, motor_mode_left, motor_speed_right, motor_mode_right: int)
+node controller(distance_left, distance_right, direction_layer_2: int) returns (obs_left, obs_right, reversing: bool; direction_layer_1, count, motor_speed_left, motor_mode_left, motor_speed_right, motor_mode_right: int)
 contract
 	var
 		rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8: bool;
 	let
-		rule1 = not (obs_left & obs_right) or (direction_layer_1=4);
-		rule2 = not (obs_left & (not obs_right)) or (direction_layer_1=3);
-		rule3 = not ((not obs_left) & obs_right) or (direction_layer_1=2);
-		rule4 = not ((not obs_left) & (not obs_right)) or ((direction_layer_1>=1) & (direction_layer_1<4));
+		rule1 = not ((obs_left & obs_right) & (not reversing)) or (direction_layer_1=4);
+		rule2 = not ((obs_left & (not obs_right)) & (not reversing)) or (direction_layer_1=3);
+		rule3 = not (((not obs_left) & obs_right) & (not reversing)) or (direction_layer_1=2);
+		rule4 = not (((not obs_left) & (not obs_right)) & (not reversing)) or ((direction_layer_1>=1) & (direction_layer_1<4));
 
 		rule5 = not (direction_layer_1=1) or ((motor_mode_left=1) & (motor_mode_right=1));
 		rule6 = not (direction_layer_1=2) or ((motor_mode_left=2) & (motor_mode_right=1));
@@ -78,7 +87,7 @@ contract
 		obs_left = inlined obstacle(distance_left);
 		obs_right = inlined obstacle(distance_right);
 
-		direction_layer_1 = inlined movement(cntrl_dir_left, cntrl_dir_right, cntrl_dir_reverse, cntrl_dir_layer, direction_layer_2);
+		(direction_layer_1, count, reversing) = inlined movement(cntrl_dir_left, cntrl_dir_right, cntrl_dir_reverse, cntrl_dir_layer, direction_layer_2);
 
 		(motor_speed_left, motor_mode_left) = inlined motor(cntrl_motor_left);
 		(motor_speed_right, motor_mode_right) = inlined motor(cntrl_motor_right);
