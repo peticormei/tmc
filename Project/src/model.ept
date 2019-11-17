@@ -26,9 +26,9 @@ let
 			iterate = 0;
 			reversing = false;
 			direction = 1;
-			unless (not cntrl_dir_reverse) then REVERSE
-				| ((not cntrl_dir_right) or ((direction_layer_2=3) & cntrl_dir_layer)) then TURN_RIGHT
+			unless ((not cntrl_dir_right) or ((direction_layer_2=3) & cntrl_dir_layer)) then TURN_RIGHT
 				| ((not cntrl_dir_left) or ((direction_layer_2=2) & cntrl_dir_layer)) then TURN_LEFT
+				| (not cntrl_dir_reverse) then REVERSE
 		state TURN_LEFT do
 			iterate = 0;
 			reversing = false;
@@ -47,8 +47,8 @@ let
 			iterate = last iterate + 1;
 			reversing = true;
 			direction = 4;
-			unless (cntrl_dir_left) & ((last iterate)=6) then TURN_LEFT
-				| (cntrl_dir_right) & ((last iterate)=6) then TURN_RIGHT
+			unless (cntrl_dir_left) & (6 <= (last iterate)) then TURN_LEFT
+				| (cntrl_dir_right) & (6 <= (last iterate)) then TURN_RIGHT
 	end
 tel
 

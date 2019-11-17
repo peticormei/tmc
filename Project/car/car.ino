@@ -11,8 +11,8 @@ Model__controller_mem mem;
 Model__controller_out _res;
 
 int randomWalkItr = 1;
-int directionEventLeft = 1;
-int directionEventRight = 1;
+int directionEvent = 1;
+int lastDirectionEvent = 1;
 
 AF_DCMotor motor1(1);
 AF_DCMotor motor2(2);
@@ -36,7 +36,18 @@ void loop() {
 
   randomWalk();
 
-  Model__controller_step(obs_sensor_left, obs_sensor_right, directionEventLeft, directionEventRight, &_res, &mem);
+  Model__controller_step(obs_sensor_left, obs_sensor_right, directionEvent, &_res, &mem);
+
+//  Serial.println("\n");
+//  Serial.println("Direction [layer 2]:");
+//  Serial.println(directionEvent);
+//  Serial.println("Direction [layer 1]:");
+//  Serial.println(_res.direction_layer_1);
+//  Serial.println("Reversing:");
+//  Serial.println(_res.reversing);
+//  Serial.println("Count [layer 1]:");
+//  Serial.println(_res.count);
+//  Serial.println("\n");
 
   motor1.run(_res.motor_mode_left);
   motor1.setSpeed(_res.motor_speed_left);
@@ -55,29 +66,27 @@ void loop() {
 
 void randomWalk() {
   if (randomWalkItr == 1) {
-    if (directionEventLeft == 2 || directionEventRight == 2) {
-      directionEventLeft = 1;
-      directionEventRight = 1;
-    } else { 
-      directionEventLeft = random(1, 3);
-      directionEventRight = random(1, 3); 
+    lastDirectionEvent = directionEvent;
+    directionEvent = random(1, 4);
+
+    if (lastDirectionEvent == 2 & directionEvent == 3) {
+      directionEvent = 1;
+    } else if (lastDirectionEvent == 3 & directionEvent == 2) {
+      directionEvent = 1;
     }
 
-    if (directionEventLeft == 1 && directionEventRight == 1) {
+    if (directionEvent == 1) {
       randomWalkItr = random(6, 11);
-    } else if (directionEventLeft == 2 && directionEventRight == 2) {
-       randomWalk();
     } else { 
       randomWalkItr = random(2, 4);
     }
-
   } else {
     randomWalkItr--;
   }
 }
 
 int sensorLimit(int distance) {
-  if (distance >= 500) {
+  if (distance >= 400) {
     return 0;
   }
 
