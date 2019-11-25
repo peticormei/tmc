@@ -3,6 +3,7 @@
     unless => transiciona para outro estado e executa o novo estado
 *)
 
+
 node obstacle(dist: int) returns (obs: bool)
 let 
 	automaton
@@ -15,35 +16,79 @@ let
 	end
 tel
 
-node motor(event_dir: int; cntrl_turn: bool) returns (mode, velocity: int)
+
+node movement(cntrl_dir_left, cntrl_dir_right, cntrl_dir_reverse, cntrl_dir_layer: bool; direction_layer_2: int) returns (direction, count: int; reversing: bool)
+	var last iterate:int = 0;
 let
+	count = iterate;
 	automaton
-		state FORWARD do
-			mode = 1;
-			velocity = 255;
-			unless ((event_dir=2) or (not cntrl_turn)) then BACKWARD
-		state BACKWARD do
-			mode = 2;
-			velocity = 255;
-			unless ((event_dir=1) & cntrl_turn) then FORWARD
+		state AHEAD do
+			iterate = 0;
+			reversing = false;
+			direction = 1;
+			unless ((not cntrl_dir_right) or ((direction_layer_2=3) & cntrl_dir_layer)) then TURN_RIGHT
+				| ((not cntrl_dir_left) or ((direction_layer_2=2) & cntrl_dir_layer)) then TURN_LEFT
+				| (not cntrl_dir_reverse) then REVERSE
+		state TURN_LEFT do
+			iterate = 0;
+			reversing = false;
+			direction = 2;
+			unless ((not cntrl_dir_right) or ((direction_layer_2=3) & cntrl_dir_layer)) then TURN_RIGHT
+				| (((not cntrl_dir_left) or (not (direction_layer_2=2))) & cntrl_dir_layer) then AHEAD
+				| (not cntrl_dir_reverse) then REVERSE
+		state TURN_RIGHT do
+			iterate = 0;
+			reversing = false;
+			direction = 3;
+			unless ((not cntrl_dir_left) or ((direction_layer_2=2) & cntrl_dir_layer)) then TURN_LEFT
+				| (((not cntrl_dir_left) or (not (direction_layer_2=3))) & cntrl_dir_layer) then AHEAD
+				| (not cntrl_dir_reverse) then REVERSE
+		state REVERSE do
+			iterate = last iterate + 1;
+			reversing = true;
+			direction = 4;
+			unless (cntrl_dir_left) & (6 <= (last iterate)) then TURN_LEFT
+				| (cntrl_dir_right) & (6 <= (last iterate)) then TURN_RIGHT
 	end
 tel
 
-node controller(distance_left, distance_right, event_dir_left, event_dir_right: int) returns (obs_left, obs_right: bool; motor_mode_left, motor_mode_right, motor_speed_left, motor_speed_right: int)
+node motor(cntrl_motor: bool) returns (velocity, mode: int)
+let 
+	automaton
+        	state FORWARD do
+            		velocity = 255;
+            		mode = 1;
+            		unless not cntrl_motor then BACKWARD
+        	state BACKWARD do
+            		velocity = 255;
+            		mode = 2;
+            		unless cntrl_motor then FORWARD
+    	end
+tel
+
+node controller(distance_left, distance_right, direction_layer_2: int) returns (obs_left, obs_right, reversing: bool; direction_layer_1, count, motor_speed_left, motor_mode_left, motor_speed_right, motor_mode_right: int)
 contract
 	var
-		rule1, rule2, rule3: bool;
+		rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8: bool;
 	let
-		rule1 = not (obs_left & not (motor_mode_right=2)) or motor_mode_right=2;
-		rule2 = not (obs_right & not (motor_mode_left=2)) or motor_mode_left=2;
-		rule3 = not (obs_right & obs_left) or (motor_mode_left=2 & motor_mode_right=2); 
+		rule1 = not ((obs_left & obs_right) & (not reversing)) or (direction_layer_1=4);
+		rule2 = not ((obs_left & (not obs_right)) & (not reversing)) or (direction_layer_1=3);
+		rule3 = not (((not obs_left) & obs_right) & (not reversing)) or (direction_layer_1=2);
+		rule4 = not (((not obs_left) & (not obs_right)) & (not reversing)) or ((direction_layer_1>=1) & (direction_layer_1<4));
+
+		rule5 = not (direction_layer_1=1) or ((motor_mode_left=1) & (motor_mode_right=1));
+		rule6 = not (direction_layer_1=2) or ((motor_mode_left=2) & (motor_mode_right=1));
+		rule7 = not (direction_layer_1=3) or ((motor_mode_left=1) & (motor_mode_right=2));
+		rule8 = not (direction_layer_1=4) or ((motor_mode_left=2) & (motor_mode_right=2));
 	tel
-		enforce (rule1) & (rule2) & (rule3)
-		with (cntrl_turn_l, cntrl_turn_r: bool)
+		enforce (rule4) & (rule1) & (rule2) & (rule3) & (rule5) & (rule6) & (rule7) & (rule8)
+		with (cntrl_dir_layer, cntrl_dir_reverse, cntrl_dir_left, cntrl_dir_right, cntrl_motor_left, cntrl_motor_right: bool)
 	let
 		obs_left = inlined obstacle(distance_left);
-		(motor_mode_left, motor_speed_left) = inlined motor(event_dir_left, cntrl_turn_r);
-
 		obs_right = inlined obstacle(distance_right);
-		(motor_mode_right, motor_speed_right) = inlined motor(event_dir_right, cntrl_turn_l);
+
+		(direction_layer_1, count, reversing) = inlined movement(cntrl_dir_left, cntrl_dir_right, cntrl_dir_reverse, cntrl_dir_layer, direction_layer_2);
+
+		(motor_speed_left, motor_mode_left) = inlined motor(cntrl_motor_left);
+		(motor_speed_right, motor_mode_right) = inlined motor(cntrl_motor_right);
 	tel
