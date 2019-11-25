@@ -10,6 +10,10 @@
 Model__controller_mem mem;
 Model__controller_out _res;
 
+int turning = 0;
+int guidance = 1;
+bool detour = false;
+
 int randomWalkItr = 1;
 int directionEvent = 1;
 int lastDirectionEvent = 1;
@@ -34,15 +38,32 @@ void loop() {
   int obs_sensor_left = sensorLimit(getDistance(trigPinLeft, echoPinLeft));
   int obs_sensor_right = sensorLimit(getDistance(trigPinRight, echoPinRight));
 
-  randomWalk();
+//  Serial.println("randomWalkItr");
+//  Serial.println(randomWalkItr);
+//  Serial.println("\n");
+//  Serial.println("turning");
+//  Serial.println(turning);
 
-  Model__controller_step(obs_sensor_left, obs_sensor_right, directionEvent, &_res, &mem);
+  randomWalk();
+  //  sWalk(obs_sensor_left, obs_sensor_right); 
 
 //  Serial.println("\n");
-//  Serial.println("Direction [layer 2]:");
-//  Serial.println(directionEvent);
-//  Serial.println("Direction [layer 1]:");
-//  Serial.println(_res.direction_layer_1);
+//  Serial.println("OBS Left:");
+//  Serial.println(obs_sensor_left);
+//  Serial.println("OBS Right:");
+//  Serial.println(obs_sensor_right);
+
+  if (detour) {
+    Model__controller_step(80, 80, directionEvent, &_res, &mem);  
+  } else {
+    Model__controller_step(obs_sensor_left, obs_sensor_right, directionEvent, &_res, &mem);  
+  }
+
+  Serial.println("\n");
+  Serial.println("Direction [layer 2]:");
+  Serial.println(directionEvent);
+  Serial.println("Direction [layer 1]:");
+  Serial.println(_res.direction_layer_1);
 //  Serial.println("Reversing:");
 //  Serial.println(_res.reversing);
 //  Serial.println("Count [layer 1]:");
@@ -62,6 +83,54 @@ void loop() {
   motor4.setSpeed(_res.motor_speed_right);
 
   delay(100);
+}
+
+void sWalk(int obs_sensor_left, int obs_sensor_right) {
+  if (randomWalkItr == 1) {
+
+    bool has_obs = (obs_sensor_left <= 70 & obs_sensor_right <= 70);
+
+    if (has_obs & !detour) {
+      detour = true;
+    } else {
+      directionEvent = 1;
+    }
+
+    if (guidance == 1 && detour) {
+      detourS(3);
+    } else if (guidance == -1 && detour) {
+      detourS(2);
+    }
+  } else {
+    randomWalkItr--;
+  }
+}
+
+void detourS(int detourEvent) {
+  if (turning == 0 || turning == 2) {
+    if (turning == 2) {
+      turning = 0;
+      guidance = flipGuidance(guidance);
+      detour = false;
+    } else {
+      turning++;      
+    }
+
+    directionEvent = detourEvent;
+    randomWalkItr = 5;
+  } else if (turning == 1) {
+    turning++;
+    directionEvent = 1;
+    randomWalkItr = 4;
+  }
+}
+
+int flipGuidance(int actual) {
+  if (actual == 1) {
+    return -1;
+  } else {
+    return 1;
+  }
 }
 
 void randomWalk() {
